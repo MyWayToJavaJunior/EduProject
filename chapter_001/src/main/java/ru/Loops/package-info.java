@@ -1,5 +1,5 @@
 /**
-* Operators.
+* Loops.
 *
 */
 package ru.bespalov;

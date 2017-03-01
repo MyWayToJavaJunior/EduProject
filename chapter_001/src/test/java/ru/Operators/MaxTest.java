@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
  * @version $Id$
  * @since 0.1
  */
-public class Max2Test {
+public class MaxTest {
     /**
      * Test Max 2.
      */
