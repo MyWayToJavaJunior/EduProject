@@ -1,4 +1,4 @@
-package ru.bespalov;
+package ru.operators;
 
 /**
 * Max of 2 numbers.

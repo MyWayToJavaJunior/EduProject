@@ -2,4 +2,4 @@
 * Loops.
 *
 */
-package ru.bespalov;
+package ru.loops;

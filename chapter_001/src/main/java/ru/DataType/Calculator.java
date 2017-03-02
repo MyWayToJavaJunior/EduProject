@@ -1,4 +1,4 @@
-package ru.bespalov;
+package ru.datatype;
 
 /**
 * Calculator.

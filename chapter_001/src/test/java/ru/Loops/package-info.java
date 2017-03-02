@@ -2,4 +2,4 @@
 * Test loops.
 *
 */
-package ru.bespalov;
+package ru.loops;

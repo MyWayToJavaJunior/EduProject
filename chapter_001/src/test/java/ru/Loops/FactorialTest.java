@@ -1,4 +1,4 @@
-package ru.bespalov;
+package ru.loops;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;

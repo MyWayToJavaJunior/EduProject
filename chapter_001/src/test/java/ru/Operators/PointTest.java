@@ -1,4 +1,4 @@
-package ru.bespalov;
+package ru.operators;
 
 import org.junit.Test;
 import static org.junit.Assert.assertThat;

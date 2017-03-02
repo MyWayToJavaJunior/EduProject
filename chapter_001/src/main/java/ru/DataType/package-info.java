@@ -2,4 +2,4 @@
 * Simple calculator.
 *
 */
-package ru.bespalov;
+package ru.datatype;

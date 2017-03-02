@@ -2,4 +2,4 @@
 *Calculator.
 *
 */
-package ru.bespalov;
+package ru.jvm;

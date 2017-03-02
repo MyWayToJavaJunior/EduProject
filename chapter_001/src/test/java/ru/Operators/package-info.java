@@ -2,4 +2,4 @@
 * Operators.
 *
 */
-package ru.bespalov;
+package ru.operators;

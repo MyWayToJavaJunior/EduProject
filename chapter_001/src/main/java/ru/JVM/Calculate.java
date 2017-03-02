@@ -1,4 +1,4 @@
-package ru.bespalov;
+package ru.jvm;
 
 /**
 * Calculate print "Hello World".

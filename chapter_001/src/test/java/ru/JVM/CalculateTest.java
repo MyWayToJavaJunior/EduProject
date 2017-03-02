@@ -1,4 +1,4 @@
-package ru.bespalov;
+package ru.jvm;
 
 import org.junit.Test;
 import java.io.ByteArrayOutputStream;
