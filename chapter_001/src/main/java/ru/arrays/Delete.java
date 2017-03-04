@@ -22,11 +22,18 @@ public class Delete {
         for (int i = 0; i <= end; i++) {
             for (int j = 0; j <= end; j++) {
                 if (mas[i].equals(mas[j]) && i != j) {
-                    tmp = mas[end];
-                    mas[end] = mas[j];
-                    mas[j] = tmp;
+                    tmp = mas[j];
+                    for(int t = j; t < end; t++) {
+                        mas[t] = mas[t + 1];
+                    }
+                    mas[end] = tmp;
+                   // tmp = mas[end];
+                   // tmp1 = mas[end - 1];
+                   // mas[end]=mas[j];
+                   //  mas[j]=tmp;
                     end--;
                     count++;
+                    j--;
                 }
             }
         }
