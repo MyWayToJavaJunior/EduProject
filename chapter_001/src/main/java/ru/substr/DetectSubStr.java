@@ -30,10 +30,10 @@ public class DetectSubStr {
                     }
                     result = true;
 					count++;
-					if (count == sb.length) {
-						break;
-					}
                 }
+				if (count == sb.length - 1) {
+					break;
+				}
             }
         }
         return result;
