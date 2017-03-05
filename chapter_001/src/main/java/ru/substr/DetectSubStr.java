@@ -19,15 +19,20 @@ public class DetectSubStr {
         boolean result = false;
         char[] or = origin.toCharArray();
         char[] sb = sub.toCharArray();
-
+		int count = 0;
         for (int i = 0; i < or.length; i++) {
             if (or[i] == sb[0]) {
                 for (int j = 1; j < sb.length; j++) {
                     if (or[++i] != sb[j]) {
                         result = false;
+						count = 0;
                         break;
                     }
                     result = true;
+					count++;
+					if (count == sb.length) {
+						break;
+					}
                 }
             }
         }
