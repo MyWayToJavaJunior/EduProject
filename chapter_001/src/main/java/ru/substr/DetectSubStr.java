@@ -25,6 +25,7 @@ public class DetectSubStr {
                 for (int j = 1; j < sb.length; j++) {
                     if (or[++i] != sb[j]) {
                         result = false;
+						i -= 2;
 						count = 0;
                         break;
                     }
