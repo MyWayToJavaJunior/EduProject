@@ -25,14 +25,17 @@ public class DetectSubStr {
                 for (int j = 1; j < sb.length; j++) {
                     if (or[++i] != sb[j]) {
                         result = false;
-						i -= 2;
+						i -= ++count;
 						count = 0;
                         break;
                     }
 					count++;
+					if (count == sb.length - 1) {
+					result = true;
+					break;
+					}
                 }
 				if (count == sb.length - 1) {
-					result = true;
 					break;
 				}
             }
