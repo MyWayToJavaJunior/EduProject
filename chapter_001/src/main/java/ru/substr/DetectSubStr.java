@@ -29,12 +29,9 @@ public class DetectSubStr {
                         count = 0;
                         break;
                     }
-                    if (count == sb.length) {
-                        result = true;
-                        break;
-                    }
                 }
 				if (count == sb.length) {
+					result = true;
 					break;
 				}
             }
