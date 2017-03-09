@@ -38,6 +38,17 @@ public class DetectSubStrTest {
      * Test detect subtring in string(true).
      */
     @Test
+    public void whenStringIsContainsSubString3ThenTrue() {
+		String origin = "hellloooowwewe";
+		String sub = "l";
+		DetectSubStr d = new DetectSubStr();
+		boolean result = d.contains(origin, sub);
+		assertThat(result, is(true));
+    }
+	/**
+     * Test detect subtring in string(true).
+     */
+    @Test
     public void whenStringIsContainsSubStringThenTrue() {
 		String origin = "Hello world!";
 		String sub = "wor";

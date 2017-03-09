@@ -20,22 +20,21 @@ public class DetectSubStr {
         char[] or = origin.toCharArray();
         char[] sb = sub.toCharArray();
 		int count = 0;
-        for (int i = 0; i < or.length; i++) {
+        for (int i = 0; i < or.length - sb.length; i++) {
             if (or[i] == sb[0]) {
-                for (int j = 1; j < sb.length; j++) {
-                    if (or[++i] != sb[j]) {
-                        result = false;
-						i -= ++count;
-						count = 0;
+                for (int j = 0; j < sb.length; j++) {
+                    if (or[i + j] == sb[j]) {
+                        count++;
+                    } else {
+                        count = 0;
                         break;
                     }
-					count++;
-					if (count == sb.length - 1) {
-					result = true;
-					break;
-					}
+                    if (count == sb.length) {
+                        result = true;
+                        break;
+                    }
                 }
-				if (count == sb.length - 1) {
+				if (count == sb.length) {
 					break;
 				}
             }
