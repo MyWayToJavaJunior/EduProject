@@ -1,0 +1,4 @@
+/**
+ * Inheritance.
+ */
+package ru.inheritance;
