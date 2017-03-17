@@ -50,7 +50,7 @@ public class TrackerTest {
      * Test delete Item.
      */
     @Test
-    public void whenItemdeleteThenEmptyArray() {
+    public void whenItemDeleteThenEmptyArray() {
         Item result = new Item("first name", "first desc", 1);
         Item[] mas1 = {};
         Tracker t = new Tracker();

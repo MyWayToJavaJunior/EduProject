@@ -56,9 +56,6 @@ public class Tracker {
             count++;
         }
         System.arraycopy(this.items, ++count, this.items, --count, this.position - count);
-//        for (; count < this.position;) {
-//            this.items[count] = this.items[++count];
-//        }
         this.items[this.position] = null;
         this.position--;
     }
