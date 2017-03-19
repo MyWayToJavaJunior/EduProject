@@ -8,6 +8,9 @@ public class StartUI {
      * object for input.
      */
     private Input input;
+    /**
+     * object for tracker.
+     */
     private Tracker tracker;
     /**
      * constructor.

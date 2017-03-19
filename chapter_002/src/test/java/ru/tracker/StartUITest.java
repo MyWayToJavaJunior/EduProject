@@ -35,6 +35,10 @@ public class StartUITest {
         ui.init();
         items = tracker.findAll();
         assertThat(items[0].getName(), is("name2"));
+//        Tracker tracker = new Tracker();
+//        Input input = new StubInput(new String[] {"1", "name", "desc", "2", "name2", "desc2", id, "0"});
+//        new StartUI(input, tracker).init();
+//        assertThat(tracker.findAll()[0].getName(), is("name2"));
     }
     /**
      * Test delete item.
@@ -73,7 +77,7 @@ public class StartUITest {
     @Test
     public void whenFindByNameItemThenArray() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[] {"1", "name2", "desc2","1", "name", "desc", "5", "name", "0"});
+        Input input = new StubInput(new String[] {"1", "name2", "desc2", "1", "name", "desc", "5", "name", "0"});
         StartUI ui = new StartUI(input, tracker);
         ui.init();
         Item[] items = tracker.findByName("name");
@@ -86,7 +90,7 @@ public class StartUITest {
     @Test
     public void whenFindByIdItemThenArray() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[] {"1", "name2", "desc2","1", "name", "desc", "0"});
+        Input input = new StubInput(new String[] {"1", "name2", "desc2", "1", "name", "desc", "0"});
         StartUI ui = new StartUI(input, tracker);
         ui.init();
         Item[] items = tracker.findAll();
