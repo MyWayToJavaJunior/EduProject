@@ -25,20 +25,14 @@ public class StartUITest {
     @Test
     public void whenUpdateItemThenUpdate() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[] {"1", "name", "desc", "0"});
-        StartUI ui = new StartUI(input, tracker);
-        ui.init();
+        tracker.add(new Item("name", "desc", 0));
         Item[] items = tracker.findAll();
         String id = items[0].getId();
-        input = new StubInput(new String[] {"2", "name2", "desc2", id, "0"});
-        ui = new StartUI(input, tracker);
+        Input input = new StubInput(new String[] {"2", "name2", "desc2", id, "0"});
+        StartUI ui = new StartUI(input, tracker);
         ui.init();
         items = tracker.findAll();
         assertThat(items[0].getName(), is("name2"));
-//        Tracker tracker = new Tracker();
-//        Input input = new StubInput(new String[] {"1", "name", "desc", "2", "name2", "desc2", id, "0"});
-//        new StartUI(input, tracker).init();
-//        assertThat(tracker.findAll()[0].getName(), is("name2"));
     }
     /**
      * Test delete item.
@@ -46,13 +40,11 @@ public class StartUITest {
     @Test
     public void whenDeleteItemThenDelete() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[] {"1", "name", "desc", "0"});
-        StartUI ui = new StartUI(input, tracker);
-        ui.init();
+        tracker.add(new Item("name", "desc", 0));
         Item[] items = tracker.findAll();
         String id = items[0].getId();
-        input = new StubInput(new String[] {"3", id, "0"});
-        ui = new StartUI(input, tracker);
+        Input input = new StubInput(new String[] {"3", id, "0"});
+        StartUI ui = new StartUI(input, tracker);
         ui.init();
         items = tracker.findAll();
         Item[] result = {};
@@ -81,7 +73,6 @@ public class StartUITest {
         StartUI ui = new StartUI(input, tracker);
         ui.init();
         Item[] items = tracker.findByName("name");
-
         assertThat(items[0].getName(), is("name"));
     }
     /**
@@ -90,13 +81,12 @@ public class StartUITest {
     @Test
     public void whenFindByIdItemThenArray() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[] {"1", "name2", "desc2", "1", "name", "desc", "0"});
-        StartUI ui = new StartUI(input, tracker);
-        ui.init();
+        tracker.add(new Item("name2", "desc2", 0));
+        tracker.add(new Item("name", "desc", 0));
         Item[] items = tracker.findAll();
         String id = items[1].getId();
-        input = new StubInput(new String[] {"6", id, "0"});
-        ui = new StartUI(input, tracker);
+        Input input = new StubInput(new String[] {"6", id, "0"});
+        StartUI ui = new StartUI(input, tracker);
         ui.init();
         Item item = tracker.findById(id);
         assertThat(items[1].getName(), is(item.getName()));
