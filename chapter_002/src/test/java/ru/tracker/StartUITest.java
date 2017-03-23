@@ -69,7 +69,7 @@ public class StartUITest {
     @Test
     public void whenFindByNameItemThenArray() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[] {"1", "name2", "desc2", "1", "name", "desc", "5", "name", "0"});
+        Input input = new StubInput(new String[] {"1", "name2", "desc2", "n", "1", "name", "desc", "n", "5", "name", "0"});
         StartUI ui = new StartUI(input, tracker);
         ui.init();
         Item[] items = tracker.findByName("name");
