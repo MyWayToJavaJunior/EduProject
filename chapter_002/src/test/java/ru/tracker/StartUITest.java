@@ -91,4 +91,14 @@ public class StartUITest {
         Item item = tracker.findById(id);
         assertThat(items[1].getName(), is(item.getName()));
     }
+    /**
+     * Test unresolved value.
+     */
+    @Test (expected = NumberFormatException.class)
+    public void whenUnresolvedValueThenOk() {
+        Tracker tracker = new Tracker();
+        Input input = new StubInput(new String[] {"1", "name", "desc", "-10", "a", "0"});
+        new StartUI(input, tracker).init();
+        Item[] items = tracker.findAll();
+    }
 }

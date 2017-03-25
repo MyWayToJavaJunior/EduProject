@@ -10,4 +10,11 @@ public interface Input {
      * @return - answer.
      */
     String ask(String question);
+    /**
+     * Range of answers.
+     * @param question - question.
+     * @param range - array of ranges.
+     * @return - answer.
+     */
+    int ask(String question, int[] range);
 }

@@ -12,6 +12,7 @@ public class StartUI {
      * object for tracker.
      */
     private Tracker tracker;
+
     /**
      * constructor.
      * @param input - input object.
@@ -27,11 +28,10 @@ public class StartUI {
      */
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
-        menu.fillActions();
+        int[] ranges = menu.fillActions();
         do {
             menu.show();
-            int key = Integer.valueOf(input.ask("Select:"));
-            menu.select(key);
+            menu.select(input.ask("Select: ", ranges));
         } while (!"0".equals(this.input.ask("Exit? Press 0 for exit.")));
     }
 
@@ -40,7 +40,7 @@ public class StartUI {
      * @param args - arguments.
      */
     public static void main(String[] args) {
-        Input input = new ConsoleInput();
+        Input input = new ValidateInput();
         Tracker tracker = new Tracker();
         new StartUI(input, tracker).init();
     }

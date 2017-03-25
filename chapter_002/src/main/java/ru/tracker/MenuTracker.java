@@ -67,14 +67,21 @@ public class MenuTracker {
     }
     /**
      * fill array of actions.
+     * @return - array of range.
      */
-    public void fillActions() {
+    public int[] fillActions() {
         this.actions[1] = this.new AddItem();
         this.actions[2] = new EditItem();
         this.actions[3] = this.new DelItem();
         this.actions[4] = new MenuTracker.ShowItems();
         this.actions[5] = this.new FinfByNameItem();
         this.actions[6] = this.new FinfByIdItem();
+
+        int[] range = new int[this.actions.length - 1];
+        for (int i = 0; i < this.actions.length - 1; i++) {
+            range[i] = i + 1;
+        }
+        return range;
     }
     /**
      * Select action.
