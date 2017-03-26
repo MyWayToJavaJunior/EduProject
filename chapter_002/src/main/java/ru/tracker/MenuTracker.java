@@ -3,7 +3,7 @@ package ru.tracker;
 /**
  * Edit item class.
  */
-class EditItem implements UserAction {
+class EditItem extends BaseAction {
     /**
      * NUmber of action.
      * @return - 2.
@@ -103,7 +103,7 @@ public class MenuTracker {
     /**
      * Class add new item.
      */
-    private class AddItem implements UserAction {
+    private class AddItem extends BaseAction {
         /**
          * NUmber of action.
          * @return - 1.
@@ -140,7 +140,7 @@ public class MenuTracker {
     /**
      * Class delete new item.
      */
-    private class DelItem implements UserAction {
+    private class DelItem extends BaseAction {
         /**
          * NUmber of action.
          * @return - 3.
@@ -178,7 +178,7 @@ public class MenuTracker {
     /**
      * Class find by name item.
      */
-    private class FinfByNameItem implements UserAction {
+    private class FinfByNameItem extends BaseAction {
         /**
          * NUmber of action.
          * @return - 5.
@@ -205,7 +205,7 @@ public class MenuTracker {
     /**
      * Class find by ID item.
      */
-    private class FinfByIdItem implements UserAction {
+    private class FinfByIdItem extends BaseAction {
         /**
          * NUmber of action.
          * @return - 6.
@@ -232,7 +232,7 @@ public class MenuTracker {
     /**
      * Class show items.
      */
-    private static class ShowItems implements UserAction {
+    private static class ShowItems extends BaseAction {
         /**
          * NUmber of action.
          * @return - 4.
