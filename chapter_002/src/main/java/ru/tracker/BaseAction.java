@@ -5,10 +5,21 @@ package ru.tracker;
  */
 public abstract class BaseAction implements UserAction {
     /**
+     * Name of action.
+     */
+    private String description;
+    /**
+     * Construntor.
+     * @param name - name of action.
+     */
+    public BaseAction(String name) {
+        this.description = name;
+    }
+    /**
      * Item info.
      * @return info string.
      */
     public String info() {
-        return String.format("%s. %s", this.key(), "Show all items.");
+        return String.format("%s. %s", this.key(), description);
     }
 }

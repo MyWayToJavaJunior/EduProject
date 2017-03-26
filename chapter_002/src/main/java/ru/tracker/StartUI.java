@@ -22,7 +22,6 @@ public class StartUI {
         this.tracker = tracker;
         this.input = input;
     }
-
     /**
      * initialization.
      */
@@ -34,7 +33,6 @@ public class StartUI {
             menu.select(input.ask("Select: ", ranges));
         } while (!"0".equals(this.input.ask("Exit? Press 0 for exit.")));
     }
-
     /**
      * main method.
      * @param args - arguments.

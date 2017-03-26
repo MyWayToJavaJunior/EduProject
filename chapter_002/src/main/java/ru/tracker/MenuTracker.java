@@ -5,6 +5,13 @@ package ru.tracker;
  */
 class EditItem extends BaseAction {
     /**
+     * Construntor.
+     * @param name - name of action.
+     */
+    EditItem(String name) {
+        super(name);
+    }
+    /**
      * NUmber of action.
      * @return - 2.
      */
@@ -18,13 +25,6 @@ class EditItem extends BaseAction {
      */
     public void execute(Input input, Tracker tracker)  {
         tracker.update(updateItem(input));
-    }
-    /**
-     * Edit item info.
-     * @return info string.
-     */
-    public String info() {
-        return String.format("%s. %s", this.key(), "Edit the item.");
     }
     /**
      * Edit item.
@@ -70,12 +70,12 @@ public class MenuTracker {
      * @return - array of range.
      */
     public int[] fillActions() {
-        this.actions[1] = this.new AddItem();
-        this.actions[2] = new EditItem();
-        this.actions[3] = this.new DelItem();
-        this.actions[4] = new MenuTracker.ShowItems();
-        this.actions[5] = this.new FinfByNameItem();
-        this.actions[6] = this.new FinfByIdItem();
+        this.actions[1] = this.new AddItem("Add new item.");
+        this.actions[2] = new EditItem("Edit item.");
+        this.actions[3] = this.new DelItem("Delete item.");
+        this.actions[4] = new MenuTracker.ShowItems("Show all items.");
+        this.actions[5] = this.new FinfByNameItem("Find item by name.");
+        this.actions[6] = this.new FinfByIdItem("Find item by ID.");
 
         int[] range = new int[this.actions.length - 1];
         for (int i = 0; i < this.actions.length - 1; i++) {
@@ -105,6 +105,13 @@ public class MenuTracker {
      */
     private class AddItem extends BaseAction {
         /**
+         * Construntor.
+         * @param name - name of action.
+         */
+        AddItem(String name) {
+            super(name);
+        }
+        /**
          * NUmber of action.
          * @return - 1.
          */
@@ -118,13 +125,6 @@ public class MenuTracker {
          */
         public void execute(Input input, Tracker tracker)  {
             tracker.add(createItem(input));
-        }
-        /**
-         * Add item info.
-         * @return info string.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Add the new item.");
         }
         /**
          * Create item.
@@ -142,6 +142,13 @@ public class MenuTracker {
      */
     private class DelItem extends BaseAction {
         /**
+         * Construntor.
+         * @param name - name of action.
+         */
+        DelItem(String name) {
+            super(name);
+        }
+        /**
          * NUmber of action.
          * @return - 3.
          */
@@ -156,14 +163,6 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker)  {
             tracker.delete(deleteItem(input));
         }
-        /**
-         * Delete item info.
-         * @return info string.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Delete the item.");
-        }
-
         /**
          * Delete item.
          * @param input - input object.
@@ -180,6 +179,13 @@ public class MenuTracker {
      */
     private class FinfByNameItem extends BaseAction {
         /**
+         * Construntor.
+         * @param name - name of action.
+         */
+        FinfByNameItem(String name) {
+            super(name);
+        }
+        /**
          * NUmber of action.
          * @return - 5.
          */
@@ -194,18 +200,18 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker)  {
             tracker.findByName(input.ask("Enter the name: "));
         }
-        /**
-         * find by name item info.
-         * @return info string.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Find by name the item.");
-        }
     }
     /**
      * Class find by ID item.
      */
     private class FinfByIdItem extends BaseAction {
+        /**
+         * Construntor.
+         * @param name - name of action.
+         */
+        FinfByIdItem(String name) {
+            super(name);
+        }
         /**
          * NUmber of action.
          * @return - 6.
@@ -221,18 +227,18 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker)  {
             tracker.findById(input.ask("Enter the id: "));
         }
-        /**
-         * find by ID item info.
-         * @return info string.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Find by ID the item.");
-        }
     }
     /**
      * Class show items.
      */
     private static class ShowItems extends BaseAction {
+        /**
+         * Construntor.
+         * @param name - name of action.
+         */
+        ShowItems(String name) {
+            super(name);
+        }
         /**
          * NUmber of action.
          * @return - 4.
@@ -249,13 +255,6 @@ public class MenuTracker {
             for (Item item : tracker.findAll()) {
                 System.out.println(String.format("%s. %s", item.getName(), item.getId()));
             }
-        }
-        /**
-         * show all info.
-         * @return info string.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Show all items.");
         }
     }
 }
