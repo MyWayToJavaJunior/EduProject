@@ -7,16 +7,10 @@ class EditItem extends BaseAction {
     /**
      * Construntor.
      * @param name - name of action.
+     * @param key - number of action.
      */
-    EditItem(String name) {
-        super(name);
-    }
-    /**
-     * NUmber of action.
-     * @return - 2.
-     */
-    public int key() {
-        return 2;
+    EditItem(String name, int key) {
+        super(name, key);
     }
     /**
      * Edit item action.
@@ -70,12 +64,12 @@ public class MenuTracker {
      * @return - array of range.
      */
     public int[] fillActions() {
-        this.actions[1] = this.new AddItem("Add new item.");
-        this.actions[2] = new EditItem("Edit item.");
-        this.actions[3] = this.new DelItem("Delete item.");
-        this.actions[4] = new MenuTracker.ShowItems("Show all items.");
-        this.actions[5] = this.new FinfByNameItem("Find item by name.");
-        this.actions[6] = this.new FinfByIdItem("Find item by ID.");
+        this.actions[1] = this.new AddItem("Add new item.", 1);
+        this.actions[2] = new EditItem("Edit item.", 2);
+        this.actions[3] = this.new DelItem("Delete item.", 3);
+        this.actions[4] = new MenuTracker.ShowItems("Show all items.", 4);
+        this.actions[5] = this.new FinfByNameItem("Find item by name.", 5);
+        this.actions[6] = this.new FinfByIdItem("Find item by ID.", 6);
 
         int[] range = new int[this.actions.length - 1];
         for (int i = 0; i < this.actions.length - 1; i++) {
@@ -107,16 +101,10 @@ public class MenuTracker {
         /**
          * Construntor.
          * @param name - name of action.
+         * @param key - number of action.
          */
-        AddItem(String name) {
-            super(name);
-        }
-        /**
-         * NUmber of action.
-         * @return - 1.
-         */
-        public int key() {
-            return 1;
+        AddItem(String name, int key) {
+            super(name, key);
         }
         /**
          * Add item action.
@@ -144,16 +132,10 @@ public class MenuTracker {
         /**
          * Construntor.
          * @param name - name of action.
+         * @param key - number of action.
          */
-        DelItem(String name) {
-            super(name);
-        }
-        /**
-         * NUmber of action.
-         * @return - 3.
-         */
-        public int key() {
-            return 3;
+        DelItem(String name, int key) {
+            super(name, key);
         }
         /**
          * Delete item action.
@@ -181,16 +163,10 @@ public class MenuTracker {
         /**
          * Construntor.
          * @param name - name of action.
+         * @param key - number of action.
          */
-        FinfByNameItem(String name) {
-            super(name);
-        }
-        /**
-         * NUmber of action.
-         * @return - 5.
-         */
-        public int key() {
-            return 5;
+        FinfByNameItem(String name, int key) {
+            super(name, key);
         }
         /**
          * find by name item action.
@@ -208,16 +184,10 @@ public class MenuTracker {
         /**
          * Construntor.
          * @param name - name of action.
+         * @param key - number of action.
          */
-        FinfByIdItem(String name) {
-            super(name);
-        }
-        /**
-         * NUmber of action.
-         * @return - 6.
-         */
-        public int key() {
-            return 6;
+        FinfByIdItem(String name, int key) {
+            super(name, key);
         }
         /**
          * find by ID item action.
@@ -235,16 +205,10 @@ public class MenuTracker {
         /**
          * Construntor.
          * @param name - name of action.
+         * @param key - number of action.
          */
-        ShowItems(String name) {
-            super(name);
-        }
-        /**
-         * NUmber of action.
-         * @return - 4.
-         */
-        public int key() {
-            return 4;
+        ShowItems(String name, int key) {
+            super(name, key);
         }
         /**
          * Print all items.

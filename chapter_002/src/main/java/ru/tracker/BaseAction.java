@@ -9,10 +9,16 @@ public abstract class BaseAction implements UserAction {
      */
     private String description;
     /**
+     * Number of action.
+     */
+    private int key;
+    /**
      * Construntor.
      * @param name - name of action.
+     * @param key - key of action.
      */
-    public BaseAction(String name) {
+    public BaseAction(String name, int key) {
+        this.key = key;
         this.description = name;
     }
     /**
@@ -20,6 +26,6 @@ public abstract class BaseAction implements UserAction {
      * @return info string.
      */
     public String info() {
-        return String.format("%s. %s", this.key(), description);
+        return String.format("%s. %s", this.key, description);
     }
 }

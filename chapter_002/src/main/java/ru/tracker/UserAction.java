@@ -8,7 +8,7 @@ public interface UserAction {
      * number of action.
      * @return - number of key.
      */
-    int key();
+   // int key();
     /**
      * Action.
      * @param input - input stream.
