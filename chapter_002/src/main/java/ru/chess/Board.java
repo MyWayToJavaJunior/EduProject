@@ -35,25 +35,8 @@ public class Board {
         for (; pos < this.figures.length; pos++) {
             if (source.getX() == figures[pos].getPosition().getX() && source.getY() == figures[pos].getPosition().getY()) {
                 figureFound = true;
-                if (figures[pos].getClass() == Rook.class) {
-                    f = new Rook(source);
-                    break;
-                } else if (figures[pos].getClass() == Queen.class) {
-                    f = new Queen(source);
-                    break;
-                } else if (figures[pos].getClass() == Bishop.class) {
-                    f = new Bishop(source);
-                    break;
-                } else if (figures[pos].getClass() == King.class) {
-                    f = new King(source);
-                    break;
-                } else if (figures[pos].getClass() == Pawn.class) {
-                    f = new Pawn(source);
-                    break;
-                } else if (figures[pos].getClass() == Knight.class) {
-                    f = new Knight(source);
-                    break;
-                }
+                f = figures[pos];
+                break;
             }
         }
 
@@ -68,13 +51,16 @@ public class Board {
 
         Cell[] way = f.way(dist);
 
-        for (int i = 0; i < figures.length; i++) {
-            for (int j = 0; j < way.length; j++) {
-                if (figures[i].getPosition().equals(way[j])) {
-                    throw new OccupiedWayException("Way is occupied.");
+        if(!(f instanceof Knight)) {
+            for (int i = 0; i < figures.length; i++) {
+                for (int j = 0; j < way.length; j++) {
+                    if (figures[i].getPosition().equals(way[j])) {
+                        throw new OccupiedWayException("Way is occupied.");
+                    }
                 }
             }
         }
+
         figures[pos] = f.clone(dist);
         result = true;
 

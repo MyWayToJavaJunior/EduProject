@@ -13,16 +13,44 @@ public class BoardTest {
      */
     @Test
     public void whenFigureCanGoThenOk() {
-        Cell bishopStart = new Cell(1, 1);
-        Cell other = new Cell(4, 1);
-        Rook rook = new Rook(bishopStart);
-        Rook rook1 = new Rook(other);
-        Figure[] figures = new Figure[] {rook, rook1};
+        Cell rookStart = new Cell(1, 1);
+        Rook rook = new Rook(rookStart);
+
+        Figure[] figures = new Figure[] {rook};
+
         Board board = new Board(figures);
+
         Cell sell01 = new Cell(1, 1);
         Cell sell02 = new Cell(1, 6);
+
         board.move(sell01, sell02);
+
         Cell result = new Cell(1,  6);
+
+        assertThat(figures[0].getPosition(), is(result));
+    }
+
+    /**
+     * Test Figure can go.
+     */
+    @Test
+    public void whenKnightCanJumpThenOk() {
+        Cell rookStart = new Cell(1, 1);
+        Cell breaker = new Cell(1, 2);
+        Figure k = new Knight(rookStart);
+        Figure b = new Pawn(breaker);
+
+        Figure[] figures = new Figure[] {k, b};
+
+        Board board = new Board(figures);
+
+        Cell sell01 = new Cell(1, 1);
+        Cell sell02 = new Cell(2, 3);
+
+        board.move(sell01, sell02);
+
+        Cell result = new Cell(2,  3);
+
         assertThat(figures[0].getPosition(), is(result));
     }
 
