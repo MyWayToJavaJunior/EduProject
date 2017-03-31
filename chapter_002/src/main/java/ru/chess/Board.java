@@ -37,8 +37,23 @@ public class Board {
                 figureFound = true;
                 if (figures[pos].getClass() == Bishop.class) {
                     f = new Bishop(source);
+                    break;
+                } else if (figures[pos].getClass() == Queen.class) {
+                    f = new Queen(source);
+                    break;
+                } else if (figures[pos].getClass() == Rook.class) {
+                    f = new Rook(source);
+                    break;
+                } else if (figures[pos].getClass() == King.class) {
+                    f = new King(source);
+                    break;
+                } else if (figures[pos].getClass() == Pawn.class) {
+                    f = new Pawn(source);
+                    break;
+                } else if (figures[pos].getClass() == Knight.class) {
+                    f = new Knight(source);
+                    break;
                 }
-                break;
             }
         }
 
@@ -46,7 +61,8 @@ public class Board {
             throw new FigureNotFoundException("Figure not found.");
         }
 
-        if (source.getY() < 0 || source.getY() > 9 || source.getX() < 0 || source.getX() > 9) {
+        if (source.getY() < 0 || source.getY() > 9 || source.getX() < 0 || source.getX() > 9
+                || dist.getY() < 0 || dist.getY() > 9 || dist.getX() < 0 || dist.getX() > 9) {
             throw new ImposibleMoveException("Imposible to move.");
         }
 
