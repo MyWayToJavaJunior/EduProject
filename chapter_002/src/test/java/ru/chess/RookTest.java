@@ -12,7 +12,7 @@ public class RookTest {
      * Test Rook go to cell.
      */
     @Test
-    public void whenBishopCanGoThenOk() {
+    public void whenRookCanGoThenOk() {
         Cell position = new Cell(3, 3);
         Rook b = new Rook(position);
         Cell dist = new Cell(3, 1);
@@ -22,13 +22,24 @@ public class RookTest {
     }
 
     /**
-     * Test bishop can't go.
+     * Test rook can't go.
      */
     @Test (expected = ImposibleMoveException.class)
-    public void whenBishopCantGoThenException() {
+    public void whenRookGoLikeBishopThenException() {
         Cell position = new Cell(3, 3);
         Rook b = new Rook(position);
-        Cell dist = new Cell(4, 4);
+        Cell dist = new Cell(1, 1);
+        Cell[] result = b.way(dist);
+    }
+
+    /**
+     * Test rook can't go.
+     */
+    @Test (expected = ImposibleMoveException.class)
+    public void whenRookGoLikeKnightThenException() {
+        Cell position = new Cell(3, 3);
+        Rook b = new Rook(position);
+        Cell dist = new Cell(4, 5);
         Cell[] result = b.way(dist);
     }
 }

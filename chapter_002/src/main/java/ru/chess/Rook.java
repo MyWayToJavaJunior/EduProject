@@ -5,22 +5,22 @@ package ru.chess;
  */
 public class Rook extends Figure {
     /**
-     * Constructor of bishop.
-     * @param position - position of bishop.
+     * Constructor of Rook.
+     * @param position - position of Rook.
      */
     public Rook(Cell position) {
         super(position);
     }
     /**
-     * Get copy of bishop.
-     * @param dest - position of bishop.
-     * @return - new bishop.
+     * Get copy of Rook.
+     * @param dest - position of Rook.
+     * @return - new Rook.
      */
     public Figure clone(Cell dest) {
         return new Rook(dest);
     }
     /**
-     * Way of bishop.
+     * Way of Rook.
      * @param dist - position to move.
      * @return array of cells for way.
      */

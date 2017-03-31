@@ -28,6 +28,17 @@ public class QueenTest {
     public void whenQueenCantGoThenException() {
         Cell position = new Cell(3, 3);
         Figure f = new Queen(position);
+        Cell dist = new Cell(7, 5);
+        Cell[] result = f.way(dist);
+    }
+
+    /**
+     * Test queen can't go.
+     */
+    @Test (expected = ImposibleMoveException.class)
+    public void whenQueenGoLikeKnightThenException() {
+        Cell position = new Cell(3, 3);
+        Figure f = new Queen(position);
         Cell dist = new Cell(4, 5);
         Cell[] result = f.way(dist);
     }
