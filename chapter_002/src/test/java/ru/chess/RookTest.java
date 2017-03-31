@@ -5,30 +5,30 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Created by nik on 3/30/2017.
+ * Created by nik on 3/26/2017.
  */
 public class RookTest {
     /**
      * Test Rook go to cell.
      */
     @Test
-    public void whenRookCanGoThenOk() {
+    public void whenBishopCanGoThenOk() {
         Cell position = new Cell(3, 3);
-        Figure f = new Rook(position);
-        Cell dist = new Cell(5, 5);
-        Cell[] result = f.way(dist);
-        Cell[] testData = new Cell[] {new Cell(4, 4), new Cell(5, 5)};
+        Rook b = new Rook(position);
+        Cell dist = new Cell(3, 1);
+        Cell[] result = b.way(dist);
+        Cell[] testData = new Cell[] {new Cell(3, 2), new Cell(3, 1)};
         assertThat(testData, is(result));
     }
 
     /**
-     * Test rook can't go.
+     * Test bishop can't go.
      */
     @Test (expected = ImposibleMoveException.class)
-    public void whenRookCantGoThenException() {
+    public void whenBishopCantGoThenException() {
         Cell position = new Cell(3, 3);
-        Figure f = new Rook(position);
-        Cell dist = new Cell(4, 3);
-        Cell[] result = f.way(dist);
+        Rook b = new Rook(position);
+        Cell dist = new Cell(4, 4);
+        Cell[] result = b.way(dist);
     }
 }

@@ -35,14 +35,14 @@ public class Board {
         for (; pos < this.figures.length; pos++) {
             if (source.getX() == figures[pos].getPosition().getX() && source.getY() == figures[pos].getPosition().getY()) {
                 figureFound = true;
-                if (figures[pos].getClass() == Bishop.class) {
-                    f = new Bishop(source);
+                if (figures[pos].getClass() == Rook.class) {
+                    f = new Rook(source);
                     break;
                 } else if (figures[pos].getClass() == Queen.class) {
                     f = new Queen(source);
                     break;
-                } else if (figures[pos].getClass() == Rook.class) {
-                    f = new Rook(source);
+                } else if (figures[pos].getClass() == Bishop.class) {
+                    f = new Bishop(source);
                     break;
                 } else if (figures[pos].getClass() == King.class) {
                     f = new King(source);
@@ -84,8 +84,8 @@ public class Board {
 //    public static void main(String[] args) {
 //        Cell bishopStart = new Cell(1,1);
 //        Cell other = new Cell(4,1);
-//        Bishop bishop = new Bishop(bishopStart);
-//        Bishop bishop1 = new Bishop(other);
+//        Rook bishop = new Rook(bishopStart);
+//        Rook bishop1 = new Rook(other);
 //        Figure[] figures = new Figure[] {bishop, bishop1};
 //        Board board = new Board(figures);
 //

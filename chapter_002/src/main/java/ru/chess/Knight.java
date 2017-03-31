@@ -17,7 +17,7 @@ public class Knight extends Figure {
      * @return - new Knight.
      */
     public Figure clone(Cell dest) {
-        return new Bishop(dest);
+        return new Rook(dest);
     }
     /**
      * Way of Knight.

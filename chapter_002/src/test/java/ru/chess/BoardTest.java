@@ -15,9 +15,9 @@ public class BoardTest {
     public void whenFigureCanGoThenOk() {
         Cell bishopStart = new Cell(1, 1);
         Cell other = new Cell(4, 1);
-        Bishop bishop = new Bishop(bishopStart);
-        Bishop bishop1 = new Bishop(other);
-        Figure[] figures = new Figure[] {bishop, bishop1};
+        Rook rook = new Rook(bishopStart);
+        Rook rook1 = new Rook(other);
+        Figure[] figures = new Figure[] {rook, rook1};
         Board board = new Board(figures);
         Cell sell01 = new Cell(1, 1);
         Cell sell02 = new Cell(1, 6);
@@ -33,9 +33,9 @@ public class BoardTest {
     public void whenWayOfFigureIsOccupiedThenEx() {
         Cell bishopStart = new Cell(1, 1);
         Cell other = new Cell(4, 1);
-        Bishop bishop = new Bishop(bishopStart);
-        Bishop bishop1 = new Bishop(other);
-        Figure[] figures = new Figure[] {bishop, bishop1};
+        Rook rook = new Rook(bishopStart);
+        Rook rook1 = new Rook(other);
+        Figure[] figures = new Figure[] {rook, rook1};
         Board board = new Board(figures);
         Cell sell01 = new Cell(1, 1);
         Cell sell02 = new Cell(6, 1);
@@ -49,9 +49,9 @@ public class BoardTest {
     public void whenFigureNotFoundThenEx() {
         Cell bishopStart = new Cell(1, 1);
         Cell other = new Cell(4, 1);
-        Bishop bishop = new Bishop(bishopStart);
-        Bishop bishop1 = new Bishop(other);
-        Figure[] figures = new Figure[] {bishop, bishop1};
+        Rook rook = new Rook(bishopStart);
+        Rook rook1 = new Rook(other);
+        Figure[] figures = new Figure[] {rook, rook1};
         Board board = new Board(figures);
         Cell sell01 = new Cell(2, 2);
         Cell sell02 = new Cell(6, 1);
@@ -65,9 +65,9 @@ public class BoardTest {
     public void whenFigureImposibleToMoveThenEx() {
         Cell bishopStart = new Cell(1, 1);
         Cell other = new Cell(4, 1);
-        Bishop bishop = new Bishop(bishopStart);
-        Bishop bishop1 = new Bishop(other);
-        Figure[] figures = new Figure[] {bishop, bishop1};
+        Rook rook = new Rook(bishopStart);
+        Rook rook1 = new Rook(other);
+        Figure[] figures = new Figure[] {rook, rook1};
         Board board = new Board(figures);
         Cell sell01 = new Cell(1, 1);
         Cell sell02 = new Cell(10, 10);
