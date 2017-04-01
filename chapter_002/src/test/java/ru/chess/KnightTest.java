@@ -17,7 +17,7 @@ public class KnightTest {
         Figure f = new Knight(position);
         Cell dist = new Cell(1, 4);
         Cell[] result = f.way(dist);
-        Cell[] testData = new Cell[] {new Cell(2, 3), new Cell(1, 3), new Cell(1, 4)};
+        Cell[] testData = new Cell[] {new Cell(1, 4)};
         assertThat(testData, is(result));
     }
 
