@@ -51,12 +51,10 @@ public class Board {
 
         Cell[] way = f.way(dist);
 
-        if(!(f instanceof Knight)) {
-            for (int i = 0; i < figures.length; i++) {
-                for (int j = 0; j < way.length; j++) {
-                    if (figures[i].getPosition().equals(way[j])) {
-                        throw new OccupiedWayException("Way is occupied.");
-                    }
+        for (int i = 0; i < figures.length; i++) {
+            for (int j = 0; j < way.length; j++) {
+                if (figures[i].getPosition().equals(way[j])) {
+                    throw new OccupiedWayException("Way is occupied.");
                 }
             }
         }
@@ -66,26 +64,4 @@ public class Board {
 
         return result;
     }
-
-//    public static void main(String[] args) {
-//        Cell bishopStart = new Cell(1,1);
-//        Cell other = new Cell(4,1);
-//        Rook bishop = new Rook(bishopStart);
-//        Rook bishop1 = new Rook(other);
-//        Figure[] figures = new Figure[] {bishop, bishop1};
-//        Board board = new Board(figures);
-//
-//        Cell sell01 = new Cell(1,1);
-//        Cell sell02 = new Cell(1,6);
-//
-//        try {
-//            board.move(sell01, sell02);
-//        } catch (ImposibleMoveException ime) {
-//            System.out.println("Imposibnle to move.");
-//        } catch (OccupiedWayException owe) {
-//            System.out.println("Way is occupied.");
-//        } catch (FigureNotFoundException fnf) {
-//            System.out.println("Figure not found.");
-//        }
-//    }
 }
