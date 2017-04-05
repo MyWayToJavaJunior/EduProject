@@ -3,6 +3,7 @@ package ru.testcollections;
 import java.util.Date;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Random;
 
 /**
  * Created by nik on 3/13/2017.
@@ -18,8 +19,10 @@ public class TestCollections {
      */
     public long add(Collection<String> collection, String line, int amount) {
         Date start = new Date();
+        final Random random = new Random();
+
         for (int i = 0; i < amount; i++) {
-            collection.add(line);
+            collection.add(Integer.toString(random.nextInt(1000000)));
         }
         Date finish = new Date();
         long resultTime = finish.getTime() - start.getTime();
