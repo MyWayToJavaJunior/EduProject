@@ -3,7 +3,7 @@ package ru.convert;
 /**
  * Created by nik on 4/6/2017.
  */
-public class User {
+public class User implements Comparable {
     /**
      * User id.
      */
@@ -13,6 +13,10 @@ public class User {
      */
     private String name;
     /**
+     * User age.
+     */
+    private int age;
+    /**
      * User city.
      */
     private String city;
@@ -21,25 +25,35 @@ public class User {
      * Constructor.
      * @param id - user id.
      * @param name - user name.
+     * @param age - userage.
      * @param city - user city.
      */
-    public User(int id, String name, String city) {
+    public User(int id, String name, int age, String city) {
         this.id = id;
+        this.age = age;
         this.name = name;
         this.city = city;
     }
 
     /**
      * User id getter.
-     * @return user id;
+     * @return user id.
      */
     public int getId() {
         return this.id;
     }
 
+    /**
+     * User name getter.
+     * @return user name.
+     */
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return this.age + this.id;
     }
 
     @Override
@@ -54,5 +68,16 @@ public class User {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(Object obj) {
+        User u = (User) obj;
+        return this.age - u.age;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %d", this.name, this.age);
     }
 }
