@@ -1,8 +1,8 @@
 package ru.convert;
 
 import org.junit.Test;
-
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -34,6 +34,36 @@ public class ConvertTest {
         List<Integer> list = new ArrayList<>();
         list.add(1); list.add(2); list.add(3); list.add(4); list.add(5); list.add(6); list.add(7);
         int[][] result = conv.toArray(list, 3);
+        assertThat(testData, is(result));
+    }
+
+    /**
+     * Test convert List to List.
+     */
+    @Test
+    public void whenListIsArrayListThenList() {
+        Convert c = new Convert();
+        List<Integer> testData = new ArrayList<>();
+        testData.add(1); testData.add(2); testData.add(3); testData.add(4); testData.add(5); testData.add(6);
+        List<int[]> list = new ArrayList<>();
+        list.add(new int[]{1, 2});
+        list.add(new int[]{3, 4, 5, 6});
+        List<Integer> result = c.convert(list);
+        assertThat(testData, is(result));
+    }
+
+    /**
+     * Test convert List to List.
+     */
+    @Test
+    public void whenListIsLinkedListThenList() {
+        Convert c = new Convert();
+        List<Integer> testData = new LinkedList<>();
+        testData.add(1); testData.add(2); testData.add(3); testData.add(4); testData.add(5); testData.add(6);
+        List<int[]> list = new LinkedList<>();
+        list.add(new int[]{1, 2});
+        list.add(new int[]{3, 4, 5, 6});
+        List<Integer> result = c.convert(list);
         assertThat(testData, is(result));
     }
 }

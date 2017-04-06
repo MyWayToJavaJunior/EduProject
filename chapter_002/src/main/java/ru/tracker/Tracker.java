@@ -1,5 +1,6 @@
 package ru.tracker;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -9,11 +10,7 @@ public class Tracker {
     /**
      * Array of Items.
      */
-    private Item[] items = new Item[10];
-    /**
-     * current position to add && length of array.
-     */
-    private int position = 0;
+    private ArrayList<Item> items = new ArrayList<>();
     /**
      * random object.
      */
@@ -26,7 +23,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -35,9 +32,9 @@ public class Tracker {
      * @param item - item to update.
      */
     public void update(Item item) {
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i].getId().equals(item.getId())) {
-                this.items[i] = item;
+        for (int i = 0; i < this.items.size(); i++) {
+            if (this.items.get(i).getId().equals(item.getId())) {
+                this.items.set(i, item);
                 break;
             }
         }
@@ -55,19 +52,17 @@ public class Tracker {
             }
             count++;
         }
-        System.arraycopy(this.items, ++count, this.items, --count, this.position - count);
-        this.items[this.position] = null;
-        this.position--;
+        this.items.remove(count);
     }
 
     /**
      * Find all items in array.
      * @return array of all items.
      */
-    public Item[] findAll() {
-        Item[] result = new Item[this.position];
-        for (int i = 0; i != this.position; i++) {
-            result[i] = this.items[i];
+    public ArrayList<Item> findAll() {
+        ArrayList<Item> result = new ArrayList<>();
+        for (int i = 0; i != this.items.size(); i++) {
+            result.add(this.items.get(i));
         }
         return result;
     }
@@ -77,18 +72,11 @@ public class Tracker {
      * @param key - key for search.
      * @return all items equals by name.
      */
-    public Item[] findByName(String key) {
-        int count = 0;
+    public ArrayList<Item> findByName(String key) {
+        ArrayList<Item> result = new ArrayList<>();
         for (Item item : this.items) {
             if (item != null && item.getName().equals(key)) {
-                count++;
-            }
-        }
-        Item[] result = new Item[count];
-        count = 0;
-        for (Item item : this.items) {
-            if (item != null && item.getName().equals(key)) {
-                result[count++] = item;
+                result.add(item);
             }
         }
         return result;

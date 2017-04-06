@@ -1,6 +1,9 @@
 package ru.tracker;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -16,8 +19,8 @@ public class TrackerTest {
         Item result = new Item("first name", "first desc", 1);
         Tracker t = new Tracker();
         t.add(result);
-        Item[] mas = t.findAll();
-        assertThat(mas[0], is(result));
+        ArrayList<Item> mas = t.findAll();
+        assertThat(mas.get(0), is(result));
     }
 
      /**
@@ -26,8 +29,8 @@ public class TrackerTest {
     @Test
     public void whenArrayIsEmptyThenEmpty() {
         Tracker t = new Tracker();
-        Item[] mas = {};
-        Item[] result = t.findAll();
+        ArrayList<Item> mas = new ArrayList<>();
+        ArrayList<Item> result = t.findAll();
         assertThat(result, is(mas));
     }
 
@@ -42,8 +45,8 @@ public class TrackerTest {
         Item upd = new Item("second name", "second desc", 2);
         upd.setId(i.getId());
         t.update(upd);
-        Item[] mas = t.findAll();
-        assertThat(mas[0], is(upd));
+        ArrayList<Item> mas = t.findAll();
+        assertThat(mas.get(0), is(upd));
     }
 
     /**
@@ -52,11 +55,11 @@ public class TrackerTest {
     @Test
     public void whenItemDeleteThenEmptyArray() {
         Item result = new Item("first name", "first desc", 1);
-        Item[] mas1 = {};
+        ArrayList<Item> mas1 = new ArrayList<>();
         Tracker t = new Tracker();
         t.add(result);
         t.delete(result);
-        Item[] mas = t.findAll();
+        ArrayList<Item> mas = t.findAll();
         assertThat(mas, is(mas1));
     }
 
@@ -72,9 +75,9 @@ public class TrackerTest {
         t.add(i1);
         t.add(i2);
         t.add(i3);
-        Item[] mas = t.findByName("second name");
-        assertThat(mas[0], is(i2));
-        assertThat(mas[1], is(i3));
+        ArrayList<Item> mas = t.findByName("second name");
+        assertThat(mas.get(0), is(i2));
+        assertThat(mas.get(1), is(i3));
     }
 
     /**

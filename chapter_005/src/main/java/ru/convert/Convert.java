@@ -14,11 +14,9 @@ public class Convert {
      * @return new ArrayList.
      */
     public List<Integer> toList(int[][] array) {
-        int n = array.length;
-        int m = array[n - 1].length;
         List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
                 result.add(array[i][j]);
             }
         }
@@ -48,6 +46,22 @@ public class Convert {
                 } else {
                     result[i][j] = 0;
                 }
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Convert List of Array Integers to List Integers.
+     * @param list - List to convert.
+     * @return new List.
+     */
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            int[] mas = list.get(i);
+            for (int j = 0; j < mas.length; j++) {
+                result.add(mas[j]);
             }
         }
         return result;
