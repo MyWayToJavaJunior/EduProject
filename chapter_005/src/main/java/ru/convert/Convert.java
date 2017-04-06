@@ -58,10 +58,9 @@ public class Convert {
      */
     public List<Integer> convert(List<int[]> list) {
         List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            int[] mas = list.get(i);
-            for (int j = 0; j < mas.length; j++) {
-                result.add(mas[j]);
+        for (int[] m : list) {
+            for (int j = 0; j < m.length; j++) {
+                result.add(m[j]);
             }
         }
         return result;
