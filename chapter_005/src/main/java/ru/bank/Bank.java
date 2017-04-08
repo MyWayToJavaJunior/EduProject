@@ -27,7 +27,9 @@ public class Bank {
      * @param user - user to delete.
      */
     public void deleteUser(User user) {
-        bank.remove(user);
+        if (this.bank.containsKey(user)) {
+            bank.remove(user);
+        }
     }
 
     /**
@@ -36,9 +38,11 @@ public class Bank {
      * @param account - account to add.
      */
     public void addAccountToUser(User user, Account account) {
-        List<Account> tmp = bank.get(user);
-        tmp.add(account);
-        bank.put(user, tmp);
+        if (this.bank.containsKey(user)) {
+            List<Account> tmp = bank.get(user);
+            tmp.add(account);
+            bank.put(user, tmp);
+        }
     }
 
     /**
@@ -47,10 +51,14 @@ public class Bank {
      * @param account - account to delete.
      */
     public void deleteAccountFromUser(User user, Account account) {
-        List<Account> tmp = bank.get(user);
-        for (Account a : tmp) {
-            if (a.getRequisites() == account.getRequisites()) {
-                tmp.remove(account);
+        if (this.bank.containsKey(user)) {
+            List<Account> tmp = bank.get(user);
+            if (tmp.contains(account)) {
+                for (Account a : tmp) {
+                    if (a.equals(account)) {
+                        tmp.remove(account);
+                    }
+                }
             }
         }
     }
@@ -61,7 +69,10 @@ public class Bank {
      * @return - list of accounts
      */
     public List<Account> getUserAccounts(User user) {
-        return bank.get(user);
+        if (this.bank.containsKey(user)) {
+            return bank.get(user);
+        }
+        return null;
     }
 
 
@@ -77,23 +88,27 @@ public class Bank {
     public boolean transferMoney(User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amount) {
         boolean result = false;
 
-        List<Account> srcAccs = bank.get(srcUser);
-        List<Account> dstAccs = bank.get(dstUser);
-
+        List<Account> srcAccs = null;
+        List<Account> dstAccs = null;
         Account srcAcc = null;
-        for (Account a : srcAccs) {
-            if (a == srcAccount) {
-                srcAcc = a;
-            }
-        }
-
         Account dstAcc = null;
-        for (Account a : dstAccs) {
-            if (a == dstAccount) {
-                dstAcc = a;
+
+        if (this.bank.containsKey(srcUser) && this.bank.containsKey(dstUser)) {
+            srcAccs = bank.get(srcUser);
+            dstAccs = bank.get(dstUser);
+
+            for (Account a : srcAccs) {
+                if (a.equals(srcAccount)) {
+                    srcAcc = a;
+                }
+            }
+
+            for (Account a : dstAccs) {
+                if (a.equals(dstAccount)) {
+                    dstAcc = a;
+                }
             }
         }
-
         if (srcAcc != null && dstAcc != null) {
             if (srcAcc.getValue() - amount > 0) {
                 srcAcc.setValue(srcAcc.getValue() - amount);

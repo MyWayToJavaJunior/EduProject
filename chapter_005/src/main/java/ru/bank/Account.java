@@ -47,4 +47,20 @@ public class Account {
         this.value = value;
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Account tmp = (Account) obj;
+        if (this.value == tmp.value && this.requisites == tmp.requisites) {
+            return true;
+        }
+        return false;
+    }
 }

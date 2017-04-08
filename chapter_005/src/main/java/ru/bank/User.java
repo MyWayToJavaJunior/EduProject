@@ -22,4 +22,21 @@ public class User {
         this.name = name;
         this.passport = passport;
     }
+
+    @Override
+    public int hashCode() {
+        return this.name.hashCode() + this.passport.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        User tmp = (User) obj;
+        if (this.name.equals(tmp.name) && this.passport.equals(tmp.passport)) {
+            return true;
+        }
+        return false;
+    }
 }
