@@ -53,11 +53,9 @@ public class Bank {
     public void deleteAccountFromUser(User user, Account account) {
         if (this.bank.containsKey(user)) {
             List<Account> tmp = bank.get(user);
-            if (tmp.contains(account)) {
-                for (Account a : tmp) {
-                    if (a.equals(account)) {
-                        tmp.remove(account);
-                    }
+            for (Account a : tmp) {
+                if (a.equals(account)) {
+                    tmp.remove(account);
                 }
             }
         }
