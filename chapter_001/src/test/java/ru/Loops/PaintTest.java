@@ -19,6 +19,7 @@ public class PaintTest {
     public void whenHeightIsThreeThenPaint() {
 		Paint p = new Paint();
 		final String result = p.piramid(3);
+		System.out.println(result);
 		assertThat(result, is("  ^\n ^ ^\n^   ^\n"));
     }
 }
