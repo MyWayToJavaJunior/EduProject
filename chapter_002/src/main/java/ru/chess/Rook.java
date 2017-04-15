@@ -2,7 +2,6 @@ package ru.chess;
 
 /**
  * Created by nik on 3/26/2017.
- *
  */
 public class Rook extends Figure {
     /**
