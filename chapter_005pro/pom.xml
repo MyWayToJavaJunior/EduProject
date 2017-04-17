@@ -1,0 +1,11 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>CollectionsPro</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    <parent>
+        <groupId>ru.bespalov</groupId>
+        <artifactId>EduProject</artifactId>
+        <version>0.1</version>
+    </parent>
+</project>
