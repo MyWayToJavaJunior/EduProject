@@ -13,7 +13,7 @@ public class ArrayIterTest {
      */
     @Test
     public void whenGetNextThenPointerForward() {
-        ArrayIter it = new ArrayIter(new int[] {1, 5, 6});
+        ArrayIter it = new ArrayIter(new int[][] {{1, 5}, {6, 7}});
         int testData = 5;
 
         it.next();
@@ -27,7 +27,7 @@ public class ArrayIterTest {
      */
     @Test
     public void whenChaeckHasNextThenReturnResult() {
-        ArrayIter it = new ArrayIter(new int[] {1});
+        ArrayIter it = new ArrayIter(new int[][] {{1}});
         boolean testData = false;
 
         it.next();
