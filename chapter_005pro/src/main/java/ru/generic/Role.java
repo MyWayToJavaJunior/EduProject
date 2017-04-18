@@ -3,12 +3,12 @@ package ru.generic;
 /**
  * Created by nik on 4/18/2017.
  */
-public class User extends Base {
+public class Role extends Base {
     /**
      * Constructor.
-     * @param id - id of new user.
+     * @param id - id of new role.
      */
-    public User(String id) {
+    public Role(String id) {
         this.setId(id);
     }
 
@@ -19,7 +19,7 @@ public class User extends Base {
 
     @Override
     public boolean equals(Object obj) {
-        User tmp = (User) obj;
+        Role tmp = (Role) obj;
         if (tmp.getId().equals(this.getId())) {
             return true;
         }
