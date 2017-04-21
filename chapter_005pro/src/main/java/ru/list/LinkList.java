@@ -20,20 +20,6 @@ public class LinkList<T> implements SimpleContainer {
          * link to next node in list.
          */
         private Node<T> next;
-        /**
-         * get value of node.
-         * @return value.
-         */
-        public T getValue() {
-            return (T) this.value;
-        }
-        /**
-         * set value of node.
-         * @param value - value to set.
-         */
-        public void setValue(Object value) {
-            this.value = value;
-        }
     }
 
     /**
@@ -45,10 +31,32 @@ public class LinkList<T> implements SimpleContainer {
      */
     private Node<T> tail;
 
+    /**
+     * Remove item from list.
+     * @param index - index of item.
+     */
+    public void remove(int index) {
+        if (index == 0) {
+            head = head.next;
+            return;
+        }
+        Node<T> result = this.head;
+        index--;
+        for (int i = 0; i < index; i++) {
+            result = result.next;
+        }
+        if (result.next.next == null) {
+            result.next = null;
+            tail = result;
+        } else {
+            result.next = result.next.next;
+        }
+    }
+
     @Override
     public void add(Object value) {
         Node<T> node = new Node<>();
-        node.setValue(value);
+        node.value = value;
         if (head == null) {
             head = node;
             tail = node;
@@ -64,7 +72,7 @@ public class LinkList<T> implements SimpleContainer {
         for (int i = 0; i < index; i++) {
             result = result.next;
         }
-        return (T) result.getValue();
+        return (T) result.value;
     }
 
     @Override

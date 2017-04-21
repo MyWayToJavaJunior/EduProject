@@ -49,7 +49,7 @@ public class DynList<T> implements SimpleContainer {
 
     @Override
     public void add(Object value) {
-        if (this.position == this.position) {
+        if (this.position == this.length - 1) {
             makeExpand();
         }
         container[position++] = value;
