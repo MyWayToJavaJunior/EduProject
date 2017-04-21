@@ -76,10 +76,7 @@ public class LinkList<T> implements SimpleContainer {
 
             @Override
             public boolean hasNext() {
-                if (head.next != null) {
-                    return true;
-                }
-                return false;
+                return head.next != null;
             }
 
             @Override
