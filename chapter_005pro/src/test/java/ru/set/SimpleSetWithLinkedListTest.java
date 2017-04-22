@@ -7,13 +7,13 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by nik on 4/22/2017.
  */
-public class SimpleSetTest {
+public class SimpleSetWithLinkedListTest {
     /**
-     * Test set with array.
+     * Test set with linked list.
      */
     @Test
     public void whenAddSameItemsThenAddedOnlyDifferent() {
-        SimpleSetWithArrayList<String> ss = new SimpleSetWithArrayList<>();
+        SimpleSetWithLinkedList<String> ss = new SimpleSetWithLinkedList<>();
         ss.add("first");
         ss.add("second");
         ss.add("first");

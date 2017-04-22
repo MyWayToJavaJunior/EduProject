@@ -6,7 +6,7 @@ import java.util.Iterator;
  * Created by nik on 4/22/2017.
  * @param <T> - type.
  */
-public class SimpleSet<T> implements SimpleSetInt<T> {
+public class SimpleSetWithArrayList<T> implements ISimpleSet<T> {
     /**
      * Container.
      */
@@ -25,7 +25,7 @@ public class SimpleSet<T> implements SimpleSetInt<T> {
     /**
      * Constructor.
      */
-    public SimpleSet() {
+    public SimpleSetWithArrayList() {
         container = new Object[this.length];
     }
 
@@ -33,7 +33,7 @@ public class SimpleSet<T> implements SimpleSetInt<T> {
      * Constructor.
      * @param length - length of new container.
      */
-    public SimpleSet(int length) {
+    public SimpleSetWithArrayList(int length) {
         this.length = length;
         container = new Object[this.length];
     }
