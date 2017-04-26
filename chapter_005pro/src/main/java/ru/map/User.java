@@ -6,6 +6,7 @@ import java.util.Calendar;
  * Created by nik on 4/24/2017.
  */
 public class User {
+
     /**
      * Name of user.
      */

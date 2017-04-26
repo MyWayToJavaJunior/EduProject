@@ -23,7 +23,6 @@ public class UserTest {
         Map<User, Object> map = new HashMap<>();
         map.put(u1, "hello");
         map.put(u2, "world");
-
         System.out.println(u1.hashCode());
         System.out.println(u2.hashCode());
         System.out.println(map);
