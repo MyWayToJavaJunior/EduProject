@@ -100,8 +100,8 @@ public class StartUITest {
     @Test (expected = NumberFormatException.class)
     public void whenUnresolvedValueThenOk() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[] {"1", "name", "desc", "-10", "a", "0"});
+        Input input = new StubInput(new String[] {"1", "name", "desc", "-10", "a"});
         new StartUI(input, tracker).init();
-        ArrayList<Item> items = tracker.findAll();
+        //ArrayList<Item> items = tracker.findAll();
     }
 }
