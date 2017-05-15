@@ -27,24 +27,12 @@ public class Order implements Comparable<Order> {
         return book;
     }
 
-    public void setBook(String book) {
-        this.book = book;
-    }
-
     public Type getOperation() {
         return operation;
     }
 
-    public void setOperation(Type operation) {
-        this.operation = operation;
-    }
-
     public double getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public int getVolume() {
@@ -57,10 +45,6 @@ public class Order implements Comparable<Order> {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override
@@ -88,6 +72,14 @@ public class Order implements Comparable<Order> {
 
     @Override
     public int compareTo(Order o) {
-        return (int)(this.getPrice() - o.getPrice());
+        if (this.getPrice() - o.getPrice() < 0) {
+            return -1;
+        }
+        if (this.getPrice() - o.getPrice() > 0) {
+            return 1;
+        }
+
+        return 0;
+
     }
 }

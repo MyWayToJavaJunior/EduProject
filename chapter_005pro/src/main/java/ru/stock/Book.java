@@ -1,7 +1,5 @@
 package ru.stock;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
-
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
@@ -12,11 +10,9 @@ import java.util.*;
  */
 public class Book {
 
-     Map<String, List<Order>> sell = new TreeMap<>();
-     Map<String, List<Order>> buy = new TreeMap<>();
+    Map<String, List<Order>> sell = new TreeMap<>();
+    Map<String, List<Order>> buy = new TreeMap<>();
     private Map<String, List<Order>> books;
-
-
 
     public Book(String file) {
         SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -30,6 +26,9 @@ public class Book {
         }
     }
 
+    /**
+     * Разделение заявок на 2 мапа, на покупку и на продажу
+     */
     public void devideForSellAndBuy(Map<String, List<Order>> books) {
         String key;
         for (Map.Entry<String, List<Order>> entry : books.entrySet())
@@ -51,6 +50,9 @@ public class Book {
         }
     }
 
+    /**
+     * Суммирование заяков с одинаковой ценой.
+     */
     public void sumEqualsPrice(Map<String, List<Order>> map) {
         List<Order> list;
         String key;
@@ -70,6 +72,9 @@ public class Book {
         }
     }
 
+    /**
+     * Операции покупки-продажи.
+     */
     public void buyAndSellOperation() {
         List<Order> buyList;
         List<Order> sellList;
@@ -127,7 +132,7 @@ public class Book {
     }
 
     public static void main(String[] args) {
-
+        long t = System.currentTimeMillis();
         Book book = new Book("orders.xml");
         Map<String, List<Order>> map = book.books;
         book.devideForSellAndBuy(map);
@@ -153,5 +158,7 @@ public class Book {
             }
         }
 
+        System.out.print("Sec: ");
+        System.out.println((System.currentTimeMillis() - t) / 1000);
     }
 }
