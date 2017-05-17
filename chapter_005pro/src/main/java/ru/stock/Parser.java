@@ -173,14 +173,14 @@ public class Parser extends DefaultHandler {
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if (qName.equals("AddOrder")) {
-            order = new Order(elems[0], Order.Type.valueOf(elems[1]), new Float(elems[2]), new Integer(elems[3]), new Integer(elems[4]));
+            order = new Order(elems[0], Order.Type.valueOf(elems[1]), new Float(elems[2]), Integer.valueOf(elems[3]), Integer.valueOf(elems[4]));
             if (!books.containsKey(elems[0])) {
                 books.put(elems[0], new TreeMap<>());
             }
-            books.get(elems[0]).put(new Integer(elems[4]), order);
+            books.get(elems[0]).put(Integer.valueOf(elems[4]), order);
         } else {
             Map<Integer, Order> map = books.get(elems[0]);
-            map.remove(new Integer(elems[1]));
+            map.remove(Integer.valueOf(elems[1]));
             books.put(elems[0], map);
         }
     }
