@@ -5,10 +5,11 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+//import java.util.TreeMap;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by nik on 5/11/2017.
@@ -17,15 +18,15 @@ public class Parser extends DefaultHandler {
     /**
      * Заявки на продажу.
      */
-    private Map<String, List<Order>> sell = new TreeMap<>();
+    private Map<String, List<Order>> sell = new HashMap<>();
     /**
      * Заявки на покупку.
      */
-    private Map<String, List<Order>> buy = new TreeMap<>();
+    private Map<String, List<Order>> buy = new HashMap<>();
     /**
      * Все заявки.
      */
-    private Map<String, Map<Integer, Order>> books = new TreeMap<>();
+    private Map<String, Map<Integer, Order>> books = new HashMap<>();
     /**
      * Геттер селл.
      * @return -
@@ -175,7 +176,7 @@ public class Parser extends DefaultHandler {
         if (qName.equals("AddOrder")) {
             order = new Order(elems[0], Order.Type.valueOf(elems[1]), new Float(elems[2]), Integer.valueOf(elems[3]), Integer.valueOf(elems[4]));
             if (!books.containsKey(elems[0])) {
-                books.put(elems[0], new TreeMap<>());
+                books.put(elems[0], new HashMap<>());
             }
             books.get(elems[0]).put(Integer.valueOf(elems[4]), order);
         } else {
