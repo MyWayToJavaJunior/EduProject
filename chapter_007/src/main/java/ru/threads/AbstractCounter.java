@@ -9,11 +9,22 @@ public abstract class AbstractCounter implements Runnable {
      */
     private char[] text;
     /**
+     * Current time.
+     */
+    private long curTime = System.currentTimeMillis();
+    /**
      * Getter for text.
      * @return - text.
      */
     public char[] getText() {
         return text;
+    }
+    /**
+     * Getter for time.
+     * @return - time.
+     */
+    public long getCurTime() {
+        return curTime;
     }
 
     /**
@@ -26,6 +37,7 @@ public abstract class AbstractCounter implements Runnable {
     /**
      * Counter.
      * @return - number of spaces.
+     * @throws InterruptedException - .
      */
-    abstract int counter();
+    abstract int counter() throws InterruptedException;
 }

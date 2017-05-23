@@ -12,7 +12,17 @@ public class SpaceCounterTest {
     @Test
     public void whenSomeBlocksThenFindTheWay() {
         String s = "Hello  my friend!   ";
-        new Thread(new SpaceCounter.Space(s)).start();
-        new Thread(new SpaceCounter.Word(s)).start();
+        System.out.println("Begin!");
+        Thread t1 = new Thread(new SpaceCounter.Space(s));
+        Thread t2 = new Thread(new SpaceCounter.Word(s));
+        t2.start();
+        t1.start();
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("End!");
     }
 }
