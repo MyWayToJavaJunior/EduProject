@@ -15,16 +15,16 @@ public class SpaceCounter {
         Space(String text) {
             super(text);
         }
-        //long curTime = System.currentTimeMillis();
         @Override
         int counter() throws InterruptedException {
             int result = 0;
             for (int i = 0; i < this.getText().length; i++) {
+                Thread.sleep(200);
                 if (this.getText()[i] == ' ') {
                     result++;
                 }
                 if (System.currentTimeMillis() - this.getCurTime() > 1000) {
-                    throw new InterruptedException("To long...");
+                    Thread.currentThread().interrupt();
                 }
             }
             return result;
@@ -32,7 +32,6 @@ public class SpaceCounter {
         @Override
         public void run() {
             try {
-                Thread.sleep(2);
                 System.out.println("Spaces = " + counter());
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -52,7 +51,7 @@ public class SpaceCounter {
         }
 
         @Override
-        int counter() throws InterruptedException {
+        int counter() {
             int result = 0;
             if (this.getText()[0] != ' ') {
                 result++;
@@ -62,7 +61,7 @@ public class SpaceCounter {
                     result++;
                 }
                 if (System.currentTimeMillis() - this.getCurTime() > 1000) {
-                    throw new InterruptedException("To long...");
+                    Thread.currentThread().interrupt();
                 }
             }
             return result;
@@ -70,11 +69,7 @@ public class SpaceCounter {
 
         @Override
         public void run() {
-            try {
                 System.out.println("Words = " + counter());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
