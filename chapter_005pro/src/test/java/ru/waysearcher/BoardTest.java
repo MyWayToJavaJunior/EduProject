@@ -16,7 +16,7 @@ public class BoardTest {
      * Test.
      */
     @Test
-    public void whenAddSameItemsThenAddedOnlyDifferent() {
+    public void whenSomeBlocksThenFindTheWay() {
         Cell[] b = {new Cell(0, 4), new Cell(1, 2), new Cell(1, 4), new Cell(2, 3), new Cell(3, 1), new Cell(3, 3)};
         Board board = new Board(Arrays.asList(b), 5, new Cell(0, 0), new Cell(4, 4));
         List<Cell> result = board.go();
