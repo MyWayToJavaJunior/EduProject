@@ -3,7 +3,7 @@ package ru.threads;
 /**
  * Created by nik on 5/23/2017.
  */
-public class SpaceCounter {
+public class Counter {
     /**
      * Counter for spaces.
      */
@@ -63,13 +63,16 @@ public class SpaceCounter {
                 if (System.currentTimeMillis() - this.getCurTime() > 1000) {
                     Thread.currentThread().interrupt();
                 }
+                if (Thread.currentThread().isInterrupted()) {
+                    return -1;
+                }
             }
             return result;
         }
 
         @Override
         public void run() {
-                System.out.println("Words = " + counter());
+            System.out.println("Words = " + counter());
         }
     }
 }
