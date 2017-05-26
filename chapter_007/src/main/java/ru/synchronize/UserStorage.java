@@ -72,10 +72,12 @@ public class UserStorage {
      * @param dect - user to.
      * @param sum - sum of money to transfer.
      */
-    public synchronized void transfMoney(User src, User dect, int sum) {
-        if (src.getAmount() >= sum) {
-            src.setAmount(src.getAmount() - sum);
-            dect.setAmount(dect.getAmount() + sum);
+    public void transfMoney(User src, User dect, int sum) {
+        synchronized (this.users) {
+            if (src.getAmount() >= sum) {
+                src.setAmount(src.getAmount() - sum);
+                dect.setAmount(dect.getAmount() + sum);
+            }
         }
     }
     /**
