@@ -9,7 +9,7 @@ public class ProducerCustomer {
     /**
      * Sync queue.
      */
-    private SynchronousQueue<String> queue = new SynchronousQueue<String>();
+    private SynchronousQueue<String> queue = new SynchronousQueue<>();
     /**
      * Main met.
      * @param args - .
