@@ -18,10 +18,6 @@ public class TextSearcher {
      */
     static class ParseFile implements Runnable {
         /**
-         * Flag, if true break all threads.
-         */
-        private boolean flag = false;
-        /**
          * text for search.
          */
         private String name;
@@ -44,22 +40,14 @@ public class TextSearcher {
          * @throws FileNotFoundException -.
          */
         private void search(File f) throws FileNotFoundException {
-            if (flag && !Thread.currentThread().isInterrupted()) {
-                Thread.currentThread().interrupt();
-            }
             Scanner scanner = new Scanner(f);
             try {
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine();
 
-                    String[] cols = line.split(" ");
-
-                    for (String s : cols) {
-                        if (s.equals(this.name)) {
-                            System.out.println("Found iT in " + f.getName() + " " + Thread.currentThread().getName());
-                            this.flag = true;
-                            return;
-                        }
+                    if (line.contains(this.name)) {
+                        System.out.println("Found iT in " + f.getName() + " " + Thread.currentThread().getName());
+                        return;
                     }
                 }
 
@@ -134,12 +122,13 @@ public class TextSearcher {
      * @param args - 0 - path, 1 - word.
      */
     public static void main(String[] args) {
-//        String path = "f:\\projects\\EduProject\\";
+        String path = "f:\\projects\\EduProject\\";
+        String name = "testMeNow";
 //        TextSearcher ts = new TextSearcher(path, "testMeNow");
         int proc = Runtime.getRuntime().availableProcessors();
         ExecutorService executor = Executors.newFixedThreadPool(proc);
-        String path = args[0]; //path to begin point.
-        String name = args[1]; // word for search.
+//        String path = args[0]; //path to begin point.
+//        String name = args[1]; // word for search.
         TextSearcher ts = new TextSearcher(path, name);
         try {
             ts.searchFilesAndDirectoryes(new File(path));
