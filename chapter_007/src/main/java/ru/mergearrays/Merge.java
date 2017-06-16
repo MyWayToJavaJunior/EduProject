@@ -1,7 +1,5 @@
 package ru.mergearrays;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -9,39 +7,64 @@ import java.util.List;
  */
 public class Merge {
     /**
-     * Merge 2 lists.
-     * @param mas1 first list.
-     * @param mas2 second list.
-     * @return merge list.
+     * Sorted list for add.
      */
-    public List<Integer> merge(List<Integer> mas1, List<Integer> mas2) {
-        List<Integer> result = new ArrayList<>();
-        int j = 0;
-        int k = 0;
-        int size = mas1.size() + mas2.size();
-        Collections.sort(mas1);
-        Collections.sort(mas2);
-        for (int i = 0; i < size; i++) {
+    private List<Integer> list;
+    /**
+     * Constructor.
+     * @param list - list for add.
+     */
+    public Merge(List<Integer> list) {
+        this.list = list;
+    }
+    /**
+     * Search index to add.
+     * @param elem - element to add.
+     * @return - index for add.
+     */
+    private int searchIndex(int elem) {
+        int begin = 0;
+        int end = list.size() - 1;
+        int middle;
 
-            if (j == mas1.size()) {
-                result.add(mas2.get(k));
-                k++;
-                continue;
-            }
-            if (k == mas2.size()) {
-                result.add(mas1.get(j));
-                j++;
-                continue;
-            }
+        if (list.get(begin) > elem) {
+            return begin;
+        } else if (list.get(end) < elem) {
+            return end + 1;
+        }
 
-            if (mas1.get(j) < mas2.get(k)) {
-                result.add(mas1.get(j));
-                j++;
-            } else if (mas1.get(j) >= mas2.get(k)) {
-                result.add(mas2.get(k));
-                k++;
+        while (true) {
+            middle = (begin + end) / 2;
+
+            if (list.get(middle) == elem) {
+                return middle;
+
+            } else if (list.get(middle) > elem && list.get(middle - 1) < elem) {
+                return middle;
+            } else {
+                if (list.get(middle) < elem && list.get(middle - 1) < elem) {
+                    begin = middle + 1;
+                } else if (list.get(middle) > elem && list.get(middle - 1) > elem) {
+                    end = middle - 1;
+                }
             }
         }
-        return result;
+    }
+    /**
+     * Merge 2 lists.
+     * @param unsortedList - list with elements for add.
+     */
+    public void merge(List<Integer> unsortedList) {
+        for (Integer i : unsortedList) {
+            int index = searchIndex(i);
+            this.list.add(index, i);
+        }
+    }
+    /**
+     * Get result list.
+     * @return - result list.
+     */
+    public List<Integer> getResult() {
+        return list;
     }
 }

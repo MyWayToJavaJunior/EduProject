@@ -1,6 +1,8 @@
 package ru.mergearrays;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import static org.hamcrest.core.Is.is;
@@ -16,11 +18,13 @@ public class MergeTest {
      */
     @Test
     public void whenMerge2ListsThenArrayList() {
-        Merge merge = new Merge();
-        List<Integer> ar1 = Arrays.asList(1, 5, 9, 5, 3);
-        List<Integer> ar2 = Arrays.asList(4, 7, 2, 6, 8, 10, 12, 14);
-        List<Integer> result = merge.merge(ar1, ar2);
-        List<Integer> testData = Arrays.asList(1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 12, 14);
+        List<Integer> l = Arrays.asList(1, 2, 4, 5, 7);
+        List<Integer> list = new ArrayList<>();
+        list.addAll(l);
+        Merge m = new Merge(list);
+        m.merge(Arrays.asList(8, 3, 15, 2));
+        List<Integer> result = m.getResult();
+        List<Integer> testData = Arrays.asList(1, 2, 2, 3, 4, 5, 7, 8, 15);
         assertThat(testData, is(result));
     }
 }
