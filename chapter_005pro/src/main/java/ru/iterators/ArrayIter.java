@@ -33,7 +33,7 @@ public class ArrayIter implements Iterator {
 
     @Override
     public Object next() {
-        if (index1 == array[0].length) {
+        if (index2 == array[0].length) {
             index1++;
             index2 = 0;
         }
