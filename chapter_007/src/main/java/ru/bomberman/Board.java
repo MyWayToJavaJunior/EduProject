@@ -27,11 +27,11 @@ public class Board {
     /**
      * end game flag.
      */
-    private boolean endGame;
+    private volatile boolean endGame;
     /**
      * Hero.
      */
-    private Hero hero;
+    private volatile Hero hero;
     /**
      * Constructor.
      * @param board - board.
