@@ -12,38 +12,52 @@ public class Monster extends Figure implements Runnable{
 
     @Override
     public void run() {
-        synchronized (this.getPosition()) {
-            while (true) {
-                Random random = new Random();
-                int direct;
-                Cell newPosition = null;
+        while (!Thread.currentThread().isInterrupted()) {
+            Cell newPosition = null;
+            while (newPosition == null) {
+                newPosition = nextCell(nextDirection());
+                //System.out.println("New position " + Thread.currentThread().getName() + " " + newPosition.getX()+ ", " + newPosition.getY());
+            }
 
-                while (newPosition == null) {
-                    direct = random.nextInt(4);
-                    switch (direct) {
-                        case 0:
-                            newPosition = nextCell(Direction.UP);
-                            break;
-                        case 1:
-                            newPosition = nextCell(Direction.RIGHT);
-                            break;
-                        case 2:
-                            newPosition = nextCell(Direction.DOWN);
-                            break;
-                        case 3:
-                            newPosition = nextCell(Direction.LEFT);
-                    }
-                }
-                this.getBoard().busy(newPosition);
-
-                synchronized (newPosition) {
+            synchronized (newPosition) {
+                synchronized (this.getPosition()) {
+                    this.getBoard().busy(newPosition);
                     this.setPosition(this.getBoard().getCell(newPosition.getX(), newPosition.getY()));
                     this.getBoard().free(newPosition);
                     newPosition = null;
                     System.out.println(Thread.currentThread().getName() + " " + this.getPosition().getX() + ", " + this.getPosition().getY());
                 }
             }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
         }
+    }
+
+    public Direction nextDirection() {
+        Random random = new Random();
+        int direct = random.nextInt(4);
+        Direction result;
+        switch (direct) {
+            case 0:
+                result = Direction.UP;
+                break;
+            case 1:
+                result = Direction.RIGHT;
+                break;
+            case 2:
+                result = Direction.DOWN;
+                break;
+            case 3:
+                result = Direction.LEFT;
+                break;
+            default: result = Direction.DOWN;
+        }
+        return result;
     }
 
     public Cell nextCell(Direction direction) {
