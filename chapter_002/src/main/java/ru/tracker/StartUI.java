@@ -1,5 +1,7 @@
 package ru.tracker;
 
+import java.sql.SQLException;
+
 /**
  * Created by nik on 3/15/2017.
  */
@@ -30,7 +32,11 @@ public class StartUI {
         int[] ranges = menu.fillActions();
         do {
             menu.show();
-            menu.select(input.ask("Select: ", ranges));
+            try {
+                menu.select(input.ask("Select: ", ranges));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         } while (!"0".equals(this.input.ask("Exit? Press 0 for exit.")));
     }
     /**

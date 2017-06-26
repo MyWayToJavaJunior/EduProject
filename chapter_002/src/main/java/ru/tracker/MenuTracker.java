@@ -1,5 +1,8 @@
 package ru.tracker;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  * Edit item class.
  */
@@ -17,7 +20,7 @@ class EditItem extends BaseAction {
      * @param input - input obj.
      * @param tracker - tracker obj.
      */
-    public void execute(Input input, Tracker tracker)  {
+    public void execute(Input input, Tracker tracker) {
         tracker.update(updateItem(input));
     }
     /**
@@ -28,7 +31,7 @@ class EditItem extends BaseAction {
     private static Item updateItem(Input input) {
         Item i = new Item(input.ask("Enter new item name "),
                 input.ask("Enter new item description "),
-                System.currentTimeMillis());
+                String.valueOf(System.currentTimeMillis()));
         i.setId(input.ask("Enter item id "));
         return i;
     }
@@ -80,8 +83,9 @@ public class MenuTracker {
     /**
      * Select action.
      * @param key - action to select.
+     * @throws SQLException - .
      */
-    public void select(int key) {
+    public void select(int key) throws SQLException {
         this.actions[key].execute(this.input, this.tracker);
     }
     /**
@@ -111,7 +115,7 @@ public class MenuTracker {
          * @param input - input obj.
          * @param tracker - tracker obj.
          */
-        public void execute(Input input, Tracker tracker)  {
+        public void execute(Input input, Tracker tracker) {
             tracker.add(createItem(input));
         }
         /**
@@ -122,7 +126,7 @@ public class MenuTracker {
         private Item createItem(Input input) {
             return new Item(input.ask("Enter item name "),
                     input.ask("Enter item description "),
-                    System.currentTimeMillis());
+                    String.valueOf(System.currentTimeMillis()));
         }
     }
     /**
@@ -142,7 +146,7 @@ public class MenuTracker {
          * @param input - input obj.
          * @param tracker - tracker obj.
          */
-        public void execute(Input input, Tracker tracker)  {
+        public void execute(Input input, Tracker tracker) {
             tracker.delete(deleteItem(input));
         }
         /**
@@ -151,7 +155,8 @@ public class MenuTracker {
          * @return - new item for delete.
          */
         private Item deleteItem(Input input) {
-            Item i = new Item("", "", System.currentTimeMillis());
+            //String delId = input.ask("Enter item id ");
+            Item i = new Item("4", "", String.valueOf(System.currentTimeMillis()));
             i.setId(input.ask("Enter item id "));
             return i;
         }
@@ -173,8 +178,12 @@ public class MenuTracker {
          * @param input - input obj.
          * @param tracker - tracker obj.
          */
-        public void execute(Input input, Tracker tracker)  {
-            tracker.findByName(input.ask("Enter the name: "));
+        public void execute(Input input, Tracker tracker) {
+            ArrayList<Item> l = tracker.findByName(input.ask("Enter the name: "));
+            for (Item item : l) {
+                System.out.println(String.format("%s, %s, %s, %s",  item.getId(), item.getName(), item.getDesc(), item.getCreate()));
+            }
+
         }
     }
     /**
@@ -194,8 +203,9 @@ public class MenuTracker {
          * @param input - input obj.
          * @param tracker - tracker obj.
          */
-        public void execute(Input input, Tracker tracker)  {
-            tracker.findById(input.ask("Enter the id: "));
+        public void execute(Input input, Tracker tracker) {
+            Item item = tracker.findById(input.ask("Enter the id: "));
+            System.out.println(String.format("%s, %s, %s, %s",  item.getId(), item.getName(), item.getDesc(), item.getCreate()));
         }
     }
     /**
@@ -217,8 +227,9 @@ public class MenuTracker {
          */
         public void execute(Input input, Tracker tracker)  {
             for (Item item : tracker.findAll()) {
-                System.out.println(String.format("%s. %s", item.getName(), item.getId()));
+                System.out.println(String.format("%s, %s, %s, %s",  item.getId(), item.getName(), item.getDesc(), item.getCreate()));
             }
+
         }
     }
 }

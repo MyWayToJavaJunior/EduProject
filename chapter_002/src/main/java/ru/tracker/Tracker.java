@@ -1,20 +1,98 @@
 package ru.tracker;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Map;
+import java.util.Properties;
+import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by nik on 3/13/2017.
  */
 public class Tracker {
     /**
-     * Array of Items.
+     * Queuerys.
      */
-    private ArrayList<Item> items = new ArrayList<>();
+    private Map<String, String> querys;
     /**
-     * random object.
+     * Constructor.
      */
-    private static final Random RN = new Random();
+    public Tracker() {
+        querys = getQuery();
+        createDB();
+    }
+    /**
+     * Connection creator.
+     * @return - new connection.
+     */
+    public Connection getConnection() {
+        Properties props = new Properties();
+        try {
+            try (InputStream is = Files.newInputStream(Paths.get("database.properties"))) {
+                props.load(is);
+            }
+            String url = props.getProperty("jdbc.url");
+            String username = props.getProperty("jdbc.username");
+            String password = props.getProperty("jdbc.password");
+            return DriverManager.getConnection(url, username, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    /**
+     * Query getter.
+     * @return - map of querys.
+     */
+    public Map<String, String> getQuery() {
+        Map<String, String> querys = new HashMap<>();
+        Properties props = new Properties();
+        try {
+            try (InputStream is = Files.newInputStream(Paths.get("querys"))) {
+                props.load(is);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String query = props.getProperty("createDB");
+        querys.put("createDB", query);
+        query = props.getProperty("addItem");
+        querys.put("addItem", query);
+        query = props.getProperty("findAll");
+        querys.put("findAll", query);
+        query = props.getProperty("deleteItem");
+        querys.put("deleteItem", query);
+        query = props.getProperty("updateItem");
+        querys.put("updateItem", query);
+        query = props.getProperty("findByName");
+        querys.put("findByName", query);
+        query = props.getProperty("findById");
+        querys.put("findById", query);
+
+        return querys;
+    }
+    /**
+     * Create DB if not exists.
+     */
+    public void createDB() {
+        String createDB = querys.get("createDB");
+        try (Connection conn = getConnection()) {
+            PreparedStatement stat = conn.prepareStatement(createDB);
+            stat.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Add item to array.
@@ -22,8 +100,15 @@ public class Tracker {
      * @return added to array item.
      */
     public Item add(Item item) {
-        item.setId(this.generateId());
-        this.items.add(item);
+        try (Connection conn = getConnection()) {
+            PreparedStatement stat = conn.prepareStatement(querys.get("addItem"));
+            stat.setString(1, item.getId());
+            stat.setString(2, item.getName());
+            stat.setString(3, item.getDesc());
+            stat.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return item;
     }
 
@@ -32,11 +117,15 @@ public class Tracker {
      * @param item - item to update.
      */
     public void update(Item item) {
-        for (int i = 0; i < this.items.size(); i++) {
-            if (this.items.get(i).getId().equals(item.getId())) {
-                this.items.set(i, item);
-                break;
-            }
+
+        try (Connection conn = getConnection()) {
+            PreparedStatement stat = conn.prepareStatement(querys.get("updateItem"));
+            stat.setString(1, item.getName());
+            stat.setString(2, item.getDesc());
+            stat.setString(3, item.getId());
+            stat.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -45,14 +134,14 @@ public class Tracker {
      * @param item - item to delete.
      */
     void delete(Item item) {
-        int count = 0;
-        for (Item it : this.items) {
-            if (it.getId().equals(item.getId())) {
-                break;
-            }
-            count++;
+
+        try (Connection conn = getConnection()) {
+            PreparedStatement stat = conn.prepareStatement(querys.get("deleteItem"));
+            stat.setString(1, item.getId());
+            stat.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        this.items.remove(count);
     }
 
     /**
@@ -61,8 +150,16 @@ public class Tracker {
      */
     public ArrayList<Item> findAll() {
         ArrayList<Item> result = new ArrayList<>();
-        for (int i = 0; i != this.items.size(); i++) {
-            result.add(this.items.get(i));
+        try (Connection conn = getConnection()) {
+            PreparedStatement stat = conn.prepareStatement(querys.get("findAll"));
+            ResultSet resultSet = stat.executeQuery();
+            while (resultSet.next()) {
+                Item tmp = new Item(resultSet.getString("name"), resultSet.getString("description"), resultSet.getString("comm_date"));
+                tmp.setId(resultSet.getString("id"));
+                result.add(tmp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return result;
     }
@@ -74,10 +171,18 @@ public class Tracker {
      */
     public ArrayList<Item> findByName(String key) {
         ArrayList<Item> result = new ArrayList<>();
-        for (Item item : this.items) {
-            if (item != null && item.getName().equals(key)) {
-                result.add(item);
+
+        try (Connection conn = getConnection()) {
+            PreparedStatement stat = conn.prepareStatement(querys.get("findByName"));
+            stat.setString(1, key);
+            ResultSet resultSet = stat.executeQuery();
+            while (resultSet.next()) {
+                Item tmp = new Item(resultSet.getString("name"), resultSet.getString("description"), resultSet.getString("comm_date"));
+                tmp.setId(resultSet.getString("id"));
+                result.add(tmp);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return result;
     }
@@ -89,20 +194,18 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item result = null;
-        for (Item item : this.items) {
-            if (item != null && item.getId().equals(id)) {
-                result = item;
-                break;
+
+        try (Connection conn = getConnection()) {
+            PreparedStatement stat = conn.prepareStatement(querys.get("findById"));
+            stat.setString(1, id);
+            ResultSet resultSet = stat.executeQuery();
+            while (resultSet.next()) {
+                result = new Item(resultSet.getString("name"), resultSet.getString("description"), resultSet.getString("comm_date"));
+                result.setId(resultSet.getString("id"));
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return result;
-    }
-
-    /**
-     * Generate id.
-     * @return new id String.
-     */
-    private String generateId() {
-        return String.valueOf(System.currentTimeMillis() + RN.nextInt());
     }
 }

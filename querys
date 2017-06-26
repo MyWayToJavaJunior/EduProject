@@ -1,0 +1,7 @@
+createDB = CREATE TABLE IF NOT EXISTS Item (id character varying (40) primary key,name character varying (80),description character varying (200),comm_date timestamp);
+addItem = insert into Item (id, name, description, comm_date) values (?, ?, ?, now());
+findAll = select * from Item;
+deleteItem = delete from Item where id = ?;
+updateItem = update Item set name = ?, description = ? where id = ?;
+findByName = select * from Item where name = ?;
+findById = select * from Item where id = ?;
