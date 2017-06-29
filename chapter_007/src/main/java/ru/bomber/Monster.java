@@ -5,10 +5,23 @@ import java.util.Random;
 /**
  * Created by nik on 6/22/2017.
  */
-public class Monster extends Figure implements Runnable{
+public class Monster extends Figure implements Runnable {
+    /**
+     * constructor.
+     * @param position - position.
+     * @param board - board.
+     */
     public Monster(Cell position, Board board) {
         super(position, board);
     }
+    /**
+     * lock.
+     */
+    private static final Object LOCK_1 = new Object();
+    /**
+     * lock.
+     */
+    private static final Object LOCK_2 = new Object();
 
     @Override
     public void run() {
@@ -16,16 +29,35 @@ public class Monster extends Figure implements Runnable{
             Cell newPosition = null;
             while (newPosition == null) {
                 newPosition = nextCell(nextDirection());
-                //System.out.println("New position " + Thread.currentThread().getName() + " " + newPosition.getX()+ ", " + newPosition.getY());
             }
 
-            synchronized (newPosition) {
+            if (this.getPosition().getY() > newPosition.getY()) {
+                synchronized (newPosition) {
+                    synchronized (this.getPosition()) {
+                        doStep(newPosition);
+                    }
+                }
+            } else if (this.getPosition().getY() < newPosition.getY()) {
                 synchronized (this.getPosition()) {
-                    this.getBoard().busy(newPosition);
-                    this.setPosition(this.getBoard().getCell(newPosition.getX(), newPosition.getY()));
-                    this.getBoard().free(newPosition);
-                    newPosition = null;
-                    System.out.println(Thread.currentThread().getName() + " " + this.getPosition().getX() + ", " + this.getPosition().getY());
+                    synchronized (newPosition) {
+                        doStep(newPosition);
+                    }
+                }
+            } else if (this.getPosition().getY() == newPosition.getY() && this.getPosition().getX() > newPosition.getX()) {
+                synchronized (LOCK_1) {
+                    synchronized (newPosition) {
+                        synchronized (this.getPosition()) {
+                            doStep(newPosition);
+                        }
+                    }
+                }
+            } else {
+                synchronized (LOCK_2) {
+                    synchronized (this.getPosition()) {
+                        synchronized (newPosition) {
+                            doStep(newPosition);
+                        }
+                    }
                 }
             }
 
@@ -37,8 +69,22 @@ public class Monster extends Figure implements Runnable{
 
         }
     }
-
-    public Direction nextDirection() {
+    /**
+     * do step.
+     * @param newPosition - new position.
+     */
+    private void doStep(Cell newPosition) {
+        this.getBoard().busy(newPosition);
+        this.setPosition(this.getBoard().getCell(newPosition.getX(), newPosition.getY()));
+        this.getBoard().free(newPosition);
+        newPosition = null;
+        System.out.println(Thread.currentThread().getName() + " " + this.getPosition().getX() + ", " + this.getPosition().getY());
+    }
+    /**
+     * get next direction.
+     * @return - next direction.
+     */
+    private Direction nextDirection() {
         Random random = new Random();
         int direct = random.nextInt(4);
         Direction result;
@@ -59,31 +105,31 @@ public class Monster extends Figure implements Runnable{
         }
         return result;
     }
-
-    public Cell nextCell(Direction direction) {
-
+    /**
+     * get next cell.
+     * @param direction - direction.
+     * @return - next cell.
+     */
+    private Cell nextCell(Direction direction) {
         switch (direction) {
-            case DOWN: {
+            case DOWN:
                 if (this.getPosition().getY() > 0 && this.getPosition().isEmpty()) {
                     return this.getBoard().getCell(this.getPosition().getX(), this.getPosition().getY() - 1);
                 }
-            }
-            case UP: {
+            case UP:
                 if (this.getPosition().getY() < this.getBoard().getBoardSize() - 1 && this.getPosition().isEmpty()) {
                     return this.getBoard().getCell(this.getPosition().getX(), this.getPosition().getY() + 1);
                 }
-            }
-            case LEFT: {
+            case LEFT:
                 if (this.getPosition().getX() > 0 && this.getPosition().isEmpty()) {
                     return this.getBoard().getCell(this.getPosition().getX() - 1, this.getPosition().getY());
                 }
-            }
-            case RIGHT: {
+            case RIGHT:
                 if (this.getPosition().getX() < this.getBoard().getBoardSize() - 1 && this.getPosition().isEmpty()) {
                     return this.getBoard().getCell(this.getPosition().getX() + 1, this.getPosition().getY());
                 }
-            }
+            default:
+                return null;
         }
-        return null;
     }
 }
