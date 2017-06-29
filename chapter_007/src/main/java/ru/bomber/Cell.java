@@ -1,4 +1,4 @@
-package ru.bomber2;
+package ru.bomber;
 
 /**
  * Created by nik on 6/22/2017.

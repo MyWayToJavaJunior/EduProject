@@ -1,4 +1,4 @@
-package ru.bomber2;
+package ru.bomber;
 
 import java.util.Random;
 
