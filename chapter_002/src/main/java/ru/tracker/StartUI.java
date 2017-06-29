@@ -47,5 +47,8 @@ public class StartUI {
         Input input = new ValidateInput();
         Tracker tracker = new Tracker();
         new StartUI(input, tracker).init();
+        tracker.closeConnection();
+
+
     }
 }

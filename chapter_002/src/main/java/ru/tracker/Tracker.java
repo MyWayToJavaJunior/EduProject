@@ -23,6 +23,10 @@ public class Tracker {
      */
     private Map<String, String> querys;
     /**
+     * Connection.
+     */
+    private Connection connection = getConnection();
+    /**
      * Constructor.
      */
     public Tracker() {
@@ -49,6 +53,18 @@ public class Tracker {
             e.printStackTrace();
         }
         return null;
+    }
+    /**
+     * Close connection.
+     */
+    public void closeConnection() {
+        try {
+            this.connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     /**
      * Query getter.
@@ -86,8 +102,8 @@ public class Tracker {
      */
     public void createDB() {
         String createDB = querys.get("createDB");
-        try (Connection conn = getConnection()) {
-            PreparedStatement stat = conn.prepareStatement(createDB);
+        try {
+            PreparedStatement stat = this.connection.prepareStatement(createDB);
             stat.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,8 +116,8 @@ public class Tracker {
      * @return added to array item.
      */
     public Item add(Item item) {
-        try (Connection conn = getConnection()) {
-            PreparedStatement stat = conn.prepareStatement(querys.get("addItem"));
+        try {
+            PreparedStatement stat = this.connection.prepareStatement(querys.get("addItem"));
             stat.setString(1, item.getId());
             stat.setString(2, item.getName());
             stat.setString(3, item.getDesc());
@@ -117,9 +133,8 @@ public class Tracker {
      * @param item - item to update.
      */
     public void update(Item item) {
-
-        try (Connection conn = getConnection()) {
-            PreparedStatement stat = conn.prepareStatement(querys.get("updateItem"));
+        try {
+            PreparedStatement stat = this.connection.prepareStatement(querys.get("updateItem"));
             stat.setString(1, item.getName());
             stat.setString(2, item.getDesc());
             stat.setString(3, item.getId());
@@ -135,8 +150,8 @@ public class Tracker {
      */
     void delete(Item item) {
 
-        try (Connection conn = getConnection()) {
-            PreparedStatement stat = conn.prepareStatement(querys.get("deleteItem"));
+        try {
+            PreparedStatement stat = this.connection.prepareStatement(querys.get("deleteItem"));
             stat.setString(1, item.getId());
             stat.executeUpdate();
         } catch (SQLException e) {
@@ -150,8 +165,8 @@ public class Tracker {
      */
     public ArrayList<Item> findAll() {
         ArrayList<Item> result = new ArrayList<>();
-        try (Connection conn = getConnection()) {
-            PreparedStatement stat = conn.prepareStatement(querys.get("findAll"));
+        try {
+            PreparedStatement stat = this.connection.prepareStatement(querys.get("findAll"));
             ResultSet resultSet = stat.executeQuery();
             while (resultSet.next()) {
                 Item tmp = new Item(resultSet.getString("name"), resultSet.getString("description"), resultSet.getString("comm_date"));
@@ -172,8 +187,8 @@ public class Tracker {
     public ArrayList<Item> findByName(String key) {
         ArrayList<Item> result = new ArrayList<>();
 
-        try (Connection conn = getConnection()) {
-            PreparedStatement stat = conn.prepareStatement(querys.get("findByName"));
+        try {
+            PreparedStatement stat = this.connection.prepareStatement(querys.get("findByName"));
             stat.setString(1, key);
             ResultSet resultSet = stat.executeQuery();
             while (resultSet.next()) {
@@ -195,8 +210,8 @@ public class Tracker {
     public Item findById(String id) {
         Item result = null;
 
-        try (Connection conn = getConnection()) {
-            PreparedStatement stat = conn.prepareStatement(querys.get("findById"));
+        try {
+            PreparedStatement stat = this.connection.prepareStatement(querys.get("findById"));
             stat.setString(1, id);
             ResultSet resultSet = stat.executeQuery();
             while (resultSet.next()) {
