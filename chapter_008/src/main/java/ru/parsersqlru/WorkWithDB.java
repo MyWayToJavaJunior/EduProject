@@ -17,10 +17,6 @@ import java.util.Properties;
  */
 public class WorkWithDB {
     /**
-     * Connection.
-     */
-    private Connection connection = getConnection();
-    /**
      * Logger for DB.
      */
     private Logger logger = LogManager.getLogger(this.getClass().getName());
@@ -52,24 +48,12 @@ public class WorkWithDB {
         return null;
     }
     /**
-     * Close DB connection.
-     */
-    public void closeConnection() {
-        try {
-            this.connection.close();
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
-    }
-    /**
      * Create DB structure.
      */
     private void createDB() {
         String createDB = "CREATE TABLE IF NOT EXISTS Ads (link VARCHAR(200), subject VARCHAR(200), ad_content TEXT, create_date BIGINT, CONSTRAINT pk PRIMARY KEY(link));";
-        try {
-            PreparedStatement stat = this.connection.prepareStatement(createDB);
+        try (Connection connection = getConnection()){
+            PreparedStatement stat = connection.prepareStatement(createDB);
             stat.executeUpdate();
         } catch (SQLException e) {
             logger.error(e.getMessage());
@@ -84,8 +68,8 @@ public class WorkWithDB {
      */
     public void add(String link, String subj, String content, long date) {
         String query = "INSERT INTO Ads (link, subject, ad_content, create_date) values (?, ?, ?, ?);";
-        try {
-            PreparedStatement stat = this.connection.prepareStatement(query);
+        try (Connection connection = getConnection()){
+            PreparedStatement stat = connection.prepareStatement(query);
             stat.setString(1, link);
             stat.setString(2, subj);
             stat.setString(3, content);

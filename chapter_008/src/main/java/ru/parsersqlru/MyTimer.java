@@ -80,7 +80,6 @@ public class MyTimer extends TimerTask {
                             LOGGER.info("End of thread " + Thread.currentThread().getName());
                         }
                     } while (flag);
-                    db.closeConnection();
                 }
             };
             executor.execute(consumer);
