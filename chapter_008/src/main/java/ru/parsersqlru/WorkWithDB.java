@@ -52,7 +52,7 @@ public class WorkWithDB {
      */
     private void createDB() {
         String createDB = "CREATE TABLE IF NOT EXISTS Ads (link VARCHAR(200), subject VARCHAR(200), ad_content TEXT, create_date BIGINT, CONSTRAINT pk PRIMARY KEY(link));";
-        try (Connection connection = getConnection()){
+        try (Connection connection = getConnection()) {
             PreparedStatement stat = connection.prepareStatement(createDB);
             stat.executeUpdate();
         } catch (SQLException e) {
@@ -68,7 +68,7 @@ public class WorkWithDB {
      */
     public void add(String link, String subj, String content, long date) {
         String query = "INSERT INTO Ads (link, subject, ad_content, create_date) values (?, ?, ?, ?);";
-        try (Connection connection = getConnection()){
+        try (Connection connection = getConnection()) {
             PreparedStatement stat = connection.prepareStatement(query);
             stat.setString(1, link);
             stat.setString(2, subj);
