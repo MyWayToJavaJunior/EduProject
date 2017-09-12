@@ -43,6 +43,6 @@ public class AddServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        resp.sendRedirect("show");
+        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
 }
