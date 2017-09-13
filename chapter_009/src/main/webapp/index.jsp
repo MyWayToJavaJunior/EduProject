@@ -1,10 +1,4 @@
 <%@ page import="ru.crud2.model.User" %>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.PreparedStatement" %>
-<%@ page import="java.sql.ResultSet" %>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.sql.SQLException" %>
-<%@ page import="ru.crud.ConnectionDB" %>
 <%@ page import="ru.crud2.model.UserManager" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
