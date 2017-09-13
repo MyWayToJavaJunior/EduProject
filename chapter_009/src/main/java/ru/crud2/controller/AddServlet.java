@@ -31,6 +31,6 @@ public class AddServlet extends HttpServlet {
         String login = req.getParameter("login");
         String email = req.getParameter("email");
         this.userManager.add(new User(name, login, email, new Date()));
-        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
+        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

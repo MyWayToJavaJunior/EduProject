@@ -18,12 +18,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>ShowServlet</servlet-name>
+        <servlet-name>Users Controller Servlet</servlet-name>
         <servlet-class>ru.crud2.controller.ShowServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ShowServlet</servlet-name>
-        <url-pattern>/show</url-pattern>
+        <servlet-name>Users Controller Servlet</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <servlet>
