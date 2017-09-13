@@ -1,10 +1,12 @@
-<%@ page import="ru.crud.User" %>
+<%@ page import="ru.crud2.model.User" %>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="ru.crud.ConnectionDB" %>
+<%@ page import="ru.crud2.model.UserManager" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,19 +15,13 @@
 <body>
 <table border="1"> <tr><th>Login</th><th>Name</th><th>eMail</th><th>Date</th><th>Delete</th><th>Edit</th></tr>
     <%
-        ConnectionDB connectionDb = new ConnectionDB();
-        User user;
+        UserManager userManager = new UserManager();
+        List<User> users = userManager.getAll();
+
+
         StringBuilder sb = new StringBuilder("<table border=\"1\"> <tr><th>Login</th><th>Name</th><th>eMail</th><th>Date</th><th>Delete</th><th>Edit</th></tr>");
-        try (Connection con = connectionDb.getConnection()) {
-            String sql = "select * from users";
-            PreparedStatement statement = con.prepareStatement(sql);
-            ResultSet result = statement.executeQuery();
-            while (result.next()) {
-                user = new User(result.getString("name"),
-                        result.getString("login"),
-                        result.getString("email"),
-                        new Date(result.getLong("createDate")
-                        ));
+
+        for(User user : users) {
     %>
 
     <tr>
@@ -46,9 +42,6 @@
     </tr>
 
     <%
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     %>
     </table>

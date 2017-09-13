@@ -1,15 +1,12 @@
-package ru.crud2;
+package ru.crud2.controller;
 
-import ru.crud.ConnectionDB;
+import ru.crud2.model.UserManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 /**
  * Created by nikolay on 11/09/17.
@@ -18,25 +15,18 @@ public class DelServlet extends HttpServlet {
     /**
      * connection to db.
      */
-    private ConnectionDB connectionDb;
+    private UserManager userManager;
     /**
      * constructor with db connection creation.
      */
     public DelServlet() {
-        connectionDb = new ConnectionDB();
+        userManager = new UserManager();
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
-        String sql = "DELETE FROM users WHERE login = ?";
-
-        try (Connection con = connectionDb.getConnection()) {
-            PreparedStatement stat = con.prepareStatement(sql);
-            stat.setString(1, login);
-            stat.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        this.userManager.delete(login);
         resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
 }

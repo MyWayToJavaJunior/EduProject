@@ -1,7 +1,7 @@
-package ru.crud2;
+package ru.crud2.controller;
 
-import ru.crud.ConnectionDB;
-import ru.crud.User;
+import ru.crud2.model.ConnectionDB;
+import ru.crud2.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
