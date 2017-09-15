@@ -44,7 +44,7 @@ public class ConnectionDB {
      * Create DB structure.
      */
     private void createDB() {
-        String createDB = "create table if not exists users (name varchar(254), login varchar(254) primary key, email varchar(254), createDate bigint);";
+        String createDB = "create table if not exists users (name varchar(254), login varchar(254) primary key, email varchar(254), createDate bigint, password varchar(254), role varchar(128));";
         try (Connection connection = this.connectionPool.getConnection()) {
             PreparedStatement stat = connection.prepareStatement(createDB);
             stat.executeUpdate();

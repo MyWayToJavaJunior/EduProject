@@ -10,6 +10,16 @@
         <input type='hidden' name='login' value='<c:out value="${login}"></c:out>'/>
         New name: <input type='text' name='name'/>
         New eMail: <input type='text' name='email'/>
+        New Password: <input type='text' name='password'/>
+
+        <c:if test='${sessionScope.role == "Admin"}'>
+            <select name="roles">
+                <option disabled>Choose role</option>
+                <c:forEach items='${sessionScope.roles}' var="role">
+                    <option><c:out value="${role}"></c:out></option>
+                </c:forEach>
+            </select>
+        </c:if>
         <input type='submit'>
     </form>
     </td></tr></table>

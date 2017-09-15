@@ -23,17 +23,30 @@ public class User {
      */
     private Date createDate;
     /**
+     * user password.
+     */
+    private String password;
+    /**
+     * user role.
+     */
+    private Role role;
+
+    /**
      * Constructor.
      * @param name - name.
      * @param login - login.
      * @param email - email.
      * @param createDate - date of create.
+     * @param password - password.
+     * @param role - role.
      */
-    public User(String name, String login, String email, Date createDate) {
+    public User(String name, String login, String email, Date createDate, String password, Role role) {
         this.name = name;
         this.login = login;
         this.email = email;
         this.createDate = createDate;
+        this.password = password;
+        this.role = role;
     }
     /**
      * getter for name.
@@ -62,6 +75,20 @@ public class User {
      */
     public Date getCreateDate() {
         return this.createDate;
+    }
+    /**
+     * getter for password.
+     * @return - password.
+     */
+    public String getPassword() {
+        return this.password;
+    }
+    /**
+     * getter for role.
+     * @return - role.
+     */
+    public Role getRole() {
+        return this.role;
     }
 
     @Override

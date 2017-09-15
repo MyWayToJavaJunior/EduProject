@@ -1,5 +1,6 @@
 package ru.crud2.controller;
 
+import ru.crud2.model.Role;
 import ru.crud2.model.User;
 import ru.crud2.model.UserManager;
 
@@ -30,7 +31,9 @@ public class AddServlet extends HttpServlet {
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String email = req.getParameter("email");
-        this.userManager.add(new User(name, login, email, new Date()));
+        String password = req.getParameter("password");
+        String role = req.getParameter("roles");
+        this.userManager.add(new User(name, login, email, new Date(), password, Role.valueOf(role)));
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

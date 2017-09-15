@@ -1,4 +1,6 @@
 <web-app>
+
+    <!-- echo -->
     <servlet>
         <servlet-name>EchoServlet</servlet-name>
         <servlet-class>ru.echo.EchoServlet</servlet-class>
@@ -8,6 +10,7 @@
         <url-pattern>/echo</url-pattern>
     </servlet-mapping>
 
+    <!-- crud -->
     <servlet>
         <servlet-name>UsersServlet</servlet-name>
         <servlet-class>ru.crud.UsersServlet</servlet-class>
@@ -17,6 +20,7 @@
         <url-pattern>/crud</url-pattern>
     </servlet-mapping>
 
+    <!-- crud2 -->
     <servlet>
         <servlet-name>Users Controller Servlet</servlet-name>
         <servlet-class>ru.crud2.controller.ShowServlet</servlet-class>
@@ -52,4 +56,49 @@
         <servlet-name>EditServlet</servlet-name>
         <url-pattern>/edit</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SigninController</servlet-name>
+        <servlet-class>ru.crud2.controller.AuthServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SigninController</servlet-name>
+        <url-pattern>/auth</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ExitServlet</servlet-name>
+        <servlet-class>ru.crud2.controller.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExitServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>ru.crud2.filters.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>RoleFilter</filter-name>
+        <filter-class>ru.crud2.filters.RoleFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RoleFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>EditFilter</filter-name>
+        <filter-class>ru.crud2.filters.EditFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>EditFilter</filter-name>
+        <url-pattern>/edit</url-pattern>
+    </filter-mapping>
 </web-app>

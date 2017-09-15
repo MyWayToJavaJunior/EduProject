@@ -1,5 +1,6 @@
 package ru.crud2.controller;
 
+import ru.crud2.model.Role;
 import ru.crud2.model.User;
 import ru.crud2.model.UserManager;
 
@@ -7,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,15 +19,25 @@ public class ShowServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserManager userManager = new UserManager();
-        List<User> users = userManager.getAll();
-        req.setAttribute("users", users);
-        req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
-    }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("login", req.getParameter("login"));
-        req.getRequestDispatcher("/WEB-INF/views/edit.jsp").forward(req, resp);
+        HttpSession session = req.getSession();
+        Role role;
+        synchronized (session) {
+            role = (Role) session.getAttribute("role");
+        }
+        UserManager userManager = new UserManager();
+        if (role == Role.Admin) {
+            List<User> users = userManager.getAll();
+            List<Role> roles = userManager.getAllRoles();
+            req.setAttribute("users", users);
+            synchronized (session) {
+                session.setAttribute("roles", roles);
+            }
+            req.getRequestDispatcher("/WEB-INF/views/viewAdmin.jsp").forward(req, resp);
+        } else {
+            User user = userManager.getUser((String) session.getAttribute("login"));
+            req.setAttribute("user", user);
+            req.getRequestDispatcher("/WEB-INF/views/viewUser.jsp").forward(req, resp);
+        }
     }
 }

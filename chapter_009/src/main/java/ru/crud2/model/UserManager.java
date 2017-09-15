@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -36,14 +37,44 @@ public class UserManager {
                 users.add(new User(result.getString("name"),
                         result.getString("login"),
                         result.getString("email"),
-                        new Date(result.getLong("createDate")
-                        )));
+                        new Date(result.getLong("createDate")),
+                        result.getString("password"),
+                        Role.valueOf(result.getString("role"))
+                        ));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return users;
     }
+
+    /**
+     * user from DB.
+     * @param login - login.
+     * @return - user.
+     */
+    public User getUser(String login) {
+        User user = null;
+        try (Connection con = connectionDb.getConnection()) {
+            String sql = "select * from users where login=?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, login);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                user = new User(result.getString("name"),
+                        result.getString("login"),
+                        result.getString("email"),
+                        new Date(result.getLong("createDate")),
+                        result.getString("password"),
+                        Role.valueOf(result.getString("role"))
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
     /**
      * Add new user to DB.
      * @param user - new user.
@@ -52,13 +83,15 @@ public class UserManager {
         String name = user.getName();
         String login = user.getLogin();
         String email = user.getEmail();
-        String sql = "INSERT INTO users (name, login, email, createDate) values (?, ?, ?, ?);";
+        String sql = "INSERT INTO users (name, login, email, createDate, password, role) values (?, ?, ?, ?, ?, ?);";
         try (Connection con = connectionDb.getConnection()) {
             PreparedStatement stat = con.prepareStatement(sql);
             stat.setString(1, name);
             stat.setString(2, login);
             stat.setString(3, email);
             stat.setLong(4, new Date().getTime());
+            stat.setString(5, user.getPassword());
+            stat.setString(6, user.getRole().name());
             stat.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,12 +105,14 @@ public class UserManager {
         String name = user.getName();
         String login = user.getLogin();
         String email = user.getEmail();
-        String sql = "UPDATE users SET name = ?, email = ? WHERE login = ?";
+        String sql = "UPDATE users SET name = ?, email = ?, password = ?, role = ? WHERE login = ?";
         try (Connection con = connectionDb.getConnection()) {
             PreparedStatement stat = con.prepareStatement(sql);
             stat.setString(1, name);
             stat.setString(2, email);
-            stat.setString(3, login);
+            stat.setString(3, user.getPassword());
+            stat.setString(4, user.getRole().name());
+            stat.setString(5, login);
             stat.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,5 +131,45 @@ public class UserManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    /**
+     * Chech login and password.
+     * @param login - login.
+     * @param password - password.
+     * @return - correct or not.
+     */
+    public boolean isCredentional(String login, String password) {
+        List<User> users = this.getAll();
+        boolean exists = false;
+        for (User user : users) {
+            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                exists = true;
+                break;
+            }
+        }
+        return exists;
+    }
+    /**
+     * Get all roles.
+     * @return - list of roles.
+     */
+    public List<Role> getAllRoles() {
+        return new ArrayList<Role>(Arrays.asList(Role.values()));
+    }
+    /**
+     * Get user role.
+     * @param login - login.
+     * @return - role.
+     */
+    public Role getRole(String login) {
+        List<User> users = this.getAll();
+        Role role = null;
+        for (User user : users) {
+            if (user.getLogin().equals(login)) {
+                role = user.getRole();
+                break;
+            }
+        }
+        return role;
     }
 }
