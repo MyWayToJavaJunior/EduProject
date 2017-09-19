@@ -33,11 +33,9 @@ public class AuthFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             HttpSession session = request.getSession();
-            synchronized (session) {
-                if (session.getAttribute("login") == null) {
-                    response.sendRedirect(String.format("%s/auth", request.getContextPath()));
-                    return;
-                }
+            if (session.getAttribute("login") == null) {
+                response.sendRedirect(String.format("%s/auth", request.getContextPath()));
+                return;
             }
             filterChain.doFilter(servletRequest, servletResponse);
         }

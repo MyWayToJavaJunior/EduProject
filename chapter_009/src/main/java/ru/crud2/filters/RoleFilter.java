@@ -34,9 +34,9 @@ public class RoleFilter implements Filter {
         HttpSession session = request.getSession();
         if (!request.getRequestURI().contains("/auth")) {
             Role role;
-            synchronized (session) {
-                role = (Role) session.getAttribute("role");
-            }
+
+            role = (Role) session.getAttribute("role");
+
             if (role == Role.User
                     && !request.getServletPath().equals("/")
                     && !request.getServletPath().equals("/edit")

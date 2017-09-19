@@ -22,17 +22,13 @@ public class ShowServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         Role role;
-        synchronized (session) {
-            role = (Role) session.getAttribute("role");
-        }
+        role = (Role) session.getAttribute("role");
         UserManager userManager = new UserManager();
         if (role == Role.Admin) {
             List<User> users = userManager.getAll();
             List<Role> roles = userManager.getAllRoles();
             req.setAttribute("users", users);
-            synchronized (session) {
-                session.setAttribute("roles", roles);
-            }
+            session.setAttribute("roles", roles);
             req.getRequestDispatcher("/WEB-INF/views/viewAdmin.jsp").forward(req, resp);
         } else {
             User user = userManager.getUser((String) session.getAttribute("login"));

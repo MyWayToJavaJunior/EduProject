@@ -34,10 +34,10 @@ public class AuthServlet extends HttpServlet {
         String password = req.getParameter("password");
         if (userManager.isCredentional(login, password)) {
             HttpSession session = req.getSession();
-            synchronized (session) {
-                session.setAttribute("login", login);
-                session.setAttribute("role", userManager.getRole(login));
-            }
+
+            session.setAttribute("login", login);
+            session.setAttribute("role", userManager.getRole(login));
+
 
             resp.sendRedirect(String.format("%s/", req.getContextPath()));
         } else {
