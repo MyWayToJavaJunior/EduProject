@@ -19,10 +19,9 @@ public class AddServlet extends HttpServlet {
      * connection to db.
      */
     private UserManager userManager;
-    /**
-     * constructor with db connection creation.
-     */
-    public AddServlet() {
+
+    @Override
+    public void init() throws ServletException {
         userManager = new UserManager();
     }
 

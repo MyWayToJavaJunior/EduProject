@@ -16,10 +16,9 @@ public class DelServlet extends HttpServlet {
      * connection to db.
      */
     private UserManager userManager;
-    /**
-     * constructor with db connection creation.
-     */
-    public DelServlet() {
+
+    @Override
+    public void init() throws ServletException {
         userManager = new UserManager();
     }
 

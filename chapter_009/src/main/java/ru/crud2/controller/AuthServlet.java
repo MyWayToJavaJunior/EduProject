@@ -34,11 +34,8 @@ public class AuthServlet extends HttpServlet {
         String password = req.getParameter("password");
         if (userManager.isCredentional(login, password)) {
             HttpSession session = req.getSession();
-
             session.setAttribute("login", login);
             session.setAttribute("role", userManager.getRole(login));
-
-
             resp.sendRedirect(String.format("%s/", req.getContextPath()));
         } else {
             req.setAttribute("error", "Credentional invalid");
