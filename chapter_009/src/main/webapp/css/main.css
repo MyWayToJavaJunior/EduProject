@@ -1,0 +1,41 @@
+body {
+    background-color: #f0f6ff;
+}
+
+.tableInside {
+    border: 3px solid #666;
+    width: 100%;
+}
+
+.myBlock {
+    margin: 10%;
+    margin-left: 30%;
+    margin-right: 30%;
+    background: #b7f8ff;
+    padding: 10px;
+}
+
+.formBlock {
+    padding: 5px;
+
+}
+
+span.qqq {
+    color: red;
+    size: 15px;
+}
+
+#errorLogin {
+    color: red;
+    size: 15px;
+}
+
+
+.accessDenied {
+    margin-top: 15%;
+    margin-left: 30%;
+    margin-right: 30%;
+    text-align:  center;
+    font-size: 45px;
+}
+

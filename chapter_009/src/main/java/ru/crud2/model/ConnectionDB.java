@@ -44,7 +44,23 @@ public class ConnectionDB {
      * Create DB structure.
      */
     private void createDB() {
-        String createDB = "create table if not exists users (name varchar(254), login varchar(254) primary key, email varchar(254), createDate bigint, password varchar(254), role varchar(128));";
+        String createDB = "create table if not exists country (name text primary key);"
+                + "create table if not exists city (name text primary key, countryname text REFERENCES country(name));"
+                + "create table if not exists users (name varchar(254), login varchar(254) primary key, email varchar(254), createDate bigint, "
+                + "password varchar(254), role varchar(128), country text REFERENCES country(name), countryname text REFERENCES country(name));";
+
+//                + "insert into country (name) values ('Russia');"
+//                + "insert into country (name) values ('Ukraine');"
+//                + "insert into country (name) values ('Belarusia');"
+//                + "insert into city (name, countryname) values ('Moscow', 'Russia');"
+//                + "insert into city (name, countryname) values ('SPb', 'Russia');"
+//                + "insert into city (name, countryname) values ('Novosibirsk', 'Russia');"
+//                + "insert into city (name, countryname) values ('Kiev', 'Ukraine');"
+//                + "insert into city (name, countryname) values ('Odessa', 'Ukraine');"
+//                + "insert into city (name, countryname) values ('Harkov', 'Ukraine');"
+//                + "insert into city (name, countryname) values ('Minsk', 'Belarusia');"
+//                + "insert into city (name, countryname) values ('Bobruisk', 'Belarusia');";
+
         try (Connection connection = this.connectionPool.getConnection()) {
             PreparedStatement stat = connection.prepareStatement(createDB);
             stat.executeUpdate();

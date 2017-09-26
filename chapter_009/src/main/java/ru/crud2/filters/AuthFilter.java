@@ -29,7 +29,9 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        if (request.getRequestURI().contains("/auth")) {
+        if (request.getRequestURI().contains("/auth")
+                || request.getRequestURI().contains(".css")
+                || request.getRequestURI().contains(".js")) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             HttpSession session = request.getSession();

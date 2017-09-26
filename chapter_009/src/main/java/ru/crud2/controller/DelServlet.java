@@ -24,7 +24,7 @@ public class DelServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
+        String login = req.getParameter("dellogin");
         this.userManager.delete(login);
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }

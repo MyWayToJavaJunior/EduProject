@@ -23,6 +23,8 @@ public class ShowServlet extends HttpServlet {
         Role role;
         role = (Role) session.getAttribute("role");
         UserManager userManager = new UserManager();
+        List<String> countrys = userManager.getCountrys();
+        session.setAttribute("countrys", countrys);
         if (role == Role.Admin) {
             List<User> users = userManager.getAll();
             List<Role> roles = userManager.getAllRoles();

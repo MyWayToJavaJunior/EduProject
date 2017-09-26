@@ -39,7 +39,9 @@ public class UserManager {
                         result.getString("email"),
                         new Date(result.getLong("createDate")),
                         result.getString("password"),
-                        Role.valueOf(result.getString("role"))
+                        Role.valueOf(result.getString("role")),
+                        result.getString("country"),
+                        result.getString("city")
                         ));
             }
         } catch (SQLException e) {
@@ -66,7 +68,9 @@ public class UserManager {
                         result.getString("email"),
                         new Date(result.getLong("createDate")),
                         result.getString("password"),
-                        Role.valueOf(result.getString("role"))
+                        Role.valueOf(result.getString("role")),
+                        result.getString("country"),
+                        result.getString("city")
                 );
             }
         } catch (SQLException e) {
@@ -83,7 +87,7 @@ public class UserManager {
         String name = user.getName();
         String login = user.getLogin();
         String email = user.getEmail();
-        String sql = "INSERT INTO users (name, login, email, createDate, password, role) values (?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO users (name, login, email, createDate, password, role, country, city) values (?, ?, ?, ?, ?, ?, ?, ?);";
         try (Connection con = connectionDb.getConnection()) {
             PreparedStatement stat = con.prepareStatement(sql);
             stat.setString(1, name);
@@ -92,6 +96,8 @@ public class UserManager {
             stat.setLong(4, new Date().getTime());
             stat.setString(5, user.getPassword());
             stat.setString(6, user.getRole().name());
+            stat.setString(7, user.getCountry());
+            stat.setString(8, user.getCity());
             stat.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,14 +111,16 @@ public class UserManager {
         String name = user.getName();
         String login = user.getLogin();
         String email = user.getEmail();
-        String sql = "UPDATE users SET name = ?, email = ?, password = ?, role = ? WHERE login = ?";
+        String sql = "UPDATE users SET name = ?, email = ?, password = ?, role = ?, country = ?, city = ? WHERE login = ?";
         try (Connection con = connectionDb.getConnection()) {
             PreparedStatement stat = con.prepareStatement(sql);
             stat.setString(1, name);
             stat.setString(2, email);
             stat.setString(3, user.getPassword());
             stat.setString(4, user.getRole().name());
-            stat.setString(5, login);
+            stat.setString(5, user.getCountry());
+            stat.setString(6, user.getCity());
+            stat.setString(7, login);
             stat.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -171,5 +179,43 @@ public class UserManager {
             }
         }
         return role;
+    }
+    /**
+     * Get countrys.
+     * @return - all countrys.
+     */
+    public List<String> getCountrys() {
+        List<String> countrys = new ArrayList<>();
+        try (Connection con = connectionDb.getConnection()) {
+            String sql = "select name from country";
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                countrys.add(result.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return countrys;
+    }
+    /**
+     * Get all cities of the country.
+     * @param country - country.
+     * @return - all cities.
+     */
+    public List<String> getCities(String country) {
+        List<String> cities = new ArrayList<>();
+        try (Connection con = connectionDb.getConnection()) {
+            String sql = "select name from city where countryname = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, country);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                cities.add(result.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cities;
     }
 }

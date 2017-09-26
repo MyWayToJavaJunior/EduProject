@@ -32,7 +32,10 @@ public class RoleFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
-        if (!request.getRequestURI().contains("/auth")) {
+        if (!request.getRequestURI().contains("/auth")
+                && !request.getRequestURI().contains(".css")
+                && !request.getRequestURI().contains(".js")
+                && !request.getRequestURI().contains("/ajax")) {
             Role role;
 
             role = (Role) session.getAttribute("role");
@@ -42,7 +45,6 @@ public class RoleFilter implements Filter {
                     && !request.getServletPath().equals("/edit")
                     && !request.getServletPath().equals("/logout")) {
                 request.getRequestDispatcher("/WEB-INF/views/accessDenied.jsp").forward(request, response);
-                return;
             }
         }
         filterChain.doFilter(servletRequest, servletResponse);

@@ -31,7 +31,7 @@ public class DelServletTest {
     @Before
     public void before() {
         manager = new UserManager();
-        manager.add(new User("Name", "TestLogin", "Email@mail.ru", new Date(), "Password", Role.User));
+        manager.add(new User("Name", "TestLogin", "Email@mail.ru", new Date(), "Password", Role.User, "Russia", "SPb"));
     }
     /**
      * Test.

@@ -30,7 +30,14 @@ public class User {
      * user role.
      */
     private Role role;
-
+    /**
+     * user country.
+     */
+    private String country;
+    /**
+     * user city.
+     */
+    private String city;
     /**
      * Constructor.
      * @param name - name.
@@ -39,14 +46,18 @@ public class User {
      * @param createDate - date of create.
      * @param password - password.
      * @param role - role.
+     * @param country - country.
+     * @param city - city.
      */
-    public User(String name, String login, String email, Date createDate, String password, Role role) {
+    public User(String name, String login, String email, Date createDate, String password, Role role, String country, String city) {
         this.name = name;
         this.login = login;
         this.email = email;
         this.createDate = createDate;
         this.password = password;
         this.role = role;
+        this.country = country;
+        this.city = city;
     }
     /**
      * getter for name.
@@ -89,6 +100,20 @@ public class User {
      */
     public Role getRole() {
         return this.role;
+    }
+    /**
+     * getter for country.
+     * @return - country.
+     */
+    public String getCountry() {
+        return country;
+    }
+    /**
+     * getter for city.
+     * @return - city.
+     */
+    public String getCity() {
+        return city;
     }
 
     @Override

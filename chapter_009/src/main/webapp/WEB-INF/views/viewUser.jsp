@@ -3,9 +3,11 @@
 <html>
 <head>
     <title>User</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-<table border="1">
+<div class="myBlock">
+<table class="tableInside" border="1">
     <tr>
         <th>Login</th>
         <th>Name</th>
@@ -33,5 +35,6 @@
 </br><form action='${pageContext.servletContext.contextPath}/logout' method='post'>
     <input type='submit' value='exit'>
 </form>
+</div>
 </body>
 </html>
