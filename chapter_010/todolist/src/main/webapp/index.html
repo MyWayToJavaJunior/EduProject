@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TODO List</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/ajax.js"></script>
+</head>
+
+<body onload="getAll()">
+
+    <input type="checkBox" id="all_chb" onchange="getAll()" checked> Показывать все.
+
+    <br>
+
+    <table border="1" id="table">
+    </table>
+
+    <br>
+
+    <table border="1"><tr><th>Add item</th></tr><tr><td>
+        <form action="add" method="post">
+            Date: <input type="datetime-local" name='date' value="2017-01-01 00:00:00"
+                         pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" required/>
+            Description: <input type='text' name='desc' required/>
+            Done: <input type="checkBox" name="done">
+            <input type='submit'>
+        </form>
+    </td></tr></table>
+
+</body>
+</html>

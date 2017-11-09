@@ -1,0 +1,33 @@
+<web-app>
+
+    <servlet>
+        <servlet-name>Update Servlet</servlet-name>
+        <servlet-class>ru.servlets.UpdateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Update Servlet</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Ajax Servlet</servlet-name>
+        <servlet-class>ru.servlets.AjaxServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Ajax Servlet</servlet-name>
+        <url-pattern>/ajax</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Add Servlet</servlet-name>
+        <servlet-class>ru.servlets.AddServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Add Servlet</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+</web-app>
