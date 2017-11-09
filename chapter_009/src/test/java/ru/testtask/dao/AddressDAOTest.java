@@ -32,7 +32,7 @@ public class AddressDAOTest {
         addressDAO.add(address);
     }
     /**
-     * test.
+     * controller.
      */
     @Test
     public void addAndGetByNameTest() {
@@ -46,7 +46,7 @@ public class AddressDAOTest {
         addressDAO.delete(address2);
     }
     /**
-     * test.
+     * controller.
      */
     @Test
     public void editTest() {
@@ -63,7 +63,7 @@ public class AddressDAOTest {
         addressDAO.delete(editAddr);
     }
     /**
-     * test.
+     * controller.
      */
     @Test
     public void deleteTest() {

@@ -61,7 +61,7 @@ public class UserDAOTest {
 
         music = Arrays.asList(new MusicType("Rock", ""), new MusicType("Rap", ""));
 
-        testUser1 = new User("Test name", "test", "test",
+        testUser1 = new User("Test name", "controller", "controller",
                 new Role("User", ""),
                 testAddress1, music);
 
@@ -76,7 +76,7 @@ public class UserDAOTest {
         addressDAO.delete(testAddress2);
     }
     /**
-     * test.
+     * controller.
      */
     @Test
     public void addAndGetByNameTest() {
@@ -92,11 +92,11 @@ public class UserDAOTest {
         userDAO.delete(testUser2);
     }
     /**
-     * test.
+     * controller.
      */
     @Test
     public void editTest() {
-        User edited = new User("new", "test", "new",
+        User edited = new User("new", "controller", "new",
                 new Role("User", ""),
                 testAddress2, music);
 
@@ -109,7 +109,7 @@ public class UserDAOTest {
         userDAO.delete(edited);
     }
     /**
-     * test.
+     * controller.
      */
     @Test
     public void deleteTest() {

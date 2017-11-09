@@ -26,7 +26,7 @@ public class ShowServletTest {
      */
     private UserManager manager;
     /**
-     * before test.
+     * before controller.
      */
     @Before
     public void before() {

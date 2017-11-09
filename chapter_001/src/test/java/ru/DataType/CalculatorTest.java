@@ -5,7 +5,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Calculator test.
+ * Calculator controller.
  *
  * @author nik1202
  * @version $Id$

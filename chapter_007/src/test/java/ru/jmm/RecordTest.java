@@ -17,7 +17,7 @@ public class RecordTest {
             r.writer();
         };
 
-// UNcomment for test.
+// UNcomment for controller.
 //        for (int i = 0; i < 500; i++) {
 //            new Thread(rnb).start();
 //            new Thread(rnb).start();

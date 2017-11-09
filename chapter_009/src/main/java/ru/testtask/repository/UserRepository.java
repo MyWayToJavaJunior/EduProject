@@ -17,7 +17,6 @@ import java.util.List;
  * Created by nikolay on 08/10/17.
  */
 public class UserRepository implements IUserRepository {
-
     /**
      * connection to db.
      */

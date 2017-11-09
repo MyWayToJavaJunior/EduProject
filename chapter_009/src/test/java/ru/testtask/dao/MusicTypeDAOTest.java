@@ -32,7 +32,7 @@ public class MusicTypeDAOTest {
         musicTypeDAO.add(testType1);
     }
     /**
-     * test.
+     * controller.
      */
     @Test
     public void addAndGetByNameTest() {
@@ -44,7 +44,7 @@ public class MusicTypeDAOTest {
         musicTypeDAO.delete(testType2);
     }
     /**
-     * test.
+     * controller.
      */
     @Test
     public void editTest() {
@@ -55,7 +55,7 @@ public class MusicTypeDAOTest {
         musicTypeDAO.delete(testType1);
     }
     /**
-     * test.
+     * controller.
      */
     @Test
     public void deleteTest() {

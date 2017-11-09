@@ -80,7 +80,7 @@ public class AuthServletTest {
      */
     private List<MusicType> music;
     /**
-     * before test.
+     * before controller.
      */
     @Before
     public void before() {
@@ -119,7 +119,7 @@ public class AuthServletTest {
         userDAO.add(testUser2);
 }
     /**
-     * After test.
+     * After controller.
      */
     @After
     public void after() {

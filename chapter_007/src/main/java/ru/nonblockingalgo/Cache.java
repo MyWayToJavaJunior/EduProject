@@ -49,7 +49,7 @@ public class Cache {
         return cache.get(name).getVersion();
     }
     /**
-     * Main test method.
+     * Main controller method.
      * @param args - .
      */
     public static void main(String[] args) {

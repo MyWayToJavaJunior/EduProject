@@ -28,7 +28,7 @@ public class DelServletTest {
      */
     private UserDAO userDAO;
     /**
-     * before test.
+     * before controller.
      */
     @Before
     public void before() {

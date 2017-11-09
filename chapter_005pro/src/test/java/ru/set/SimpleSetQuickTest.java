@@ -43,7 +43,7 @@ public class SimpleSetQuickTest {
         final Random random = new Random();
         int length = 1000;
 
-        // Quick set fill test.
+        // Quick set fill controller.
         for (int i = 0; i < length; i++) {
             ss.add(Integer.toString(random.nextInt(1000000)));
         }
@@ -51,7 +51,7 @@ public class SimpleSetQuickTest {
         long resultTimeSs = finish.getTime() - start.getTime();
         System.out.println("Quick set = " + resultTimeSs);
 
-        // Set with linked list fill test.
+        // Set with linked list fill controller.
         Date start1 = new Date();
         for (int i = 0; i < length; i++) {
             ssll.add(Integer.toString(random.nextInt(1000000)));
@@ -60,7 +60,7 @@ public class SimpleSetQuickTest {
         long resultTimeSsll = finish1.getTime() - start1.getTime();
         System.out.println("Set with LinkedList = " + resultTimeSsll);
 
-        // Set with array list fill test.
+        // Set with array list fill controller.
         Date start2 = new Date();
         for (int i = 0; i < length; i++) {
             ssal.add(Integer.toString(random.nextInt(1000000)));

@@ -43,7 +43,7 @@ public class EditServletTest {
      */
     private AddressDAO addressDAO;
     /**
-     * before test.
+     * before controller.
      */
     @Before
     public void before() {
@@ -58,7 +58,7 @@ public class EditServletTest {
         address = addressDAO.getOne(new Address("City", "Street", 1));
     }
     /**
-     * After test.
+     * After controller.
      */
     @After
     public void after() {

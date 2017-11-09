@@ -32,7 +32,7 @@ public class RoleDAOTest {
         roleDAO.add(testRole1);
     }
     /**
-     * test.
+     * controller.
      */
     @Test
     public void addAndGetByNameTest() {
@@ -45,7 +45,7 @@ public class RoleDAOTest {
         roleDAO.delete(testRole2);
     }
     /**
-     * test.
+     * controller.
      */
     @Test
     public void editTest() {
@@ -57,7 +57,7 @@ public class RoleDAOTest {
         roleDAO.delete(edited);
     }
     /**
-     * test.
+     * controller.
      */
     @Test
     public void deleteTest() {

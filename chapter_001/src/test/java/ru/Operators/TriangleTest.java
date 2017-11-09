@@ -5,7 +5,7 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.number.IsCloseTo.closeTo;
 
 /**
- * Area of treangle test.
+ * Area of treangle controller.
  *
  * @author nik1202
  * @version $Id$

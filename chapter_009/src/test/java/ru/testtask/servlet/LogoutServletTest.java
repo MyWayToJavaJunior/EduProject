@@ -23,7 +23,7 @@ public class LogoutServletTest {
      */
     private UserDAO userDAO;
     /**
-     * before test.
+     * before controller.
      */
     @Before
     public void before() {

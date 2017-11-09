@@ -81,7 +81,7 @@ public class DynList<T> implements SimpleContainer {
         };
     }
     /**
-     * Main met for test.
+     * Main met for controller.
      * @param args - .
      */
     public static void main(String[] args) {

@@ -47,7 +47,7 @@ public class Board {
     }
     /**
      * Can i go to this cell?.
-     * @param c - cell for test.
+     * @param c - cell for controller.
      * @return - result.
      */
     private boolean canIGo(Cell c) {

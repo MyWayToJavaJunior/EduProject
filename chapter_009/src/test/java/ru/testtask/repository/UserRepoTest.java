@@ -117,7 +117,7 @@ public class UserRepoTest {
 
     }
     /**
-     * test.
+     * controller.
      */
     @After
     public void after() {
@@ -130,7 +130,7 @@ public class UserRepoTest {
     }
 
     /**
-     * test.
+     * controller.
      */
     @Test
     public void findUserByAddressTest() {
@@ -139,7 +139,7 @@ public class UserRepoTest {
         Assert.assertThat(users.get(0).getLogin(), Is.is("test1"));
     }
     /**
-     * test.
+     * controller.
      */
     @Test
     public void findUserByRoleTest() {
@@ -150,7 +150,7 @@ public class UserRepoTest {
         Assert.assertThat(users.get(1).getLogin(), Is.is("test2"));
     }
     /**
-     * test.
+     * controller.
      */
     @Test
     public void findUserByMusicTypeTest() {

@@ -13,21 +13,16 @@ public class TestCollections {
     /**
      * Add record to collection.
      * @param collection - collection.
-     * @param line - text to add.
      * @param amount - number of records.
      * @return - speed.
      */
-    public long add(Collection<String> collection, String line, int amount) {
-        Date start = new Date();
-        final Random random = new Random();
-
+    public long add(Collection<String> collection, int amount) {
+        long start = System.currentTimeMillis();
         for (int i = 0; i < amount; i++) {
-            collection.add(Integer.toString(random.nextInt(1000000)));
+            collection.add(Integer.toString(i));
         }
-        Date finish = new Date();
-        long resultTime = finish.getTime() - start.getTime();
 
-        return resultTime;
+        return System.currentTimeMillis() - start;
     }
 
     /**

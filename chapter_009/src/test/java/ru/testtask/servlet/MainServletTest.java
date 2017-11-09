@@ -24,7 +24,7 @@ public class MainServletTest {
      */
     private UserDAO userDAO;
     /**
-     * before test.
+     * before controller.
      */
     @Before
     public void before() {

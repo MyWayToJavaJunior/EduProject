@@ -28,7 +28,7 @@ public class AuthServletTest {
      */
     private UserManager manager;
     /**
-     * before test.
+     * before controller.
      */
     @Before
     public void before() {
@@ -36,7 +36,7 @@ public class AuthServletTest {
         manager.add(new User("Name", "TestLogin", "Email@mail.ru", new Date(), "Password", Role.User, "Russia", "SPb"));
     }
     /**
-     * After test.
+     * After controller.
      */
     @After
     public void after() {

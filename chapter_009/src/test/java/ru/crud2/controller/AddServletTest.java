@@ -27,14 +27,14 @@ public class AddServletTest {
      */
     private UserManager manager;
     /**
-     * before test.
+     * before controller.
      */
     @Before
     public void before() {
         manager = new UserManager();
     }
     /**
-     * After test.
+     * After controller.
      */
     @After
     public void after() {
