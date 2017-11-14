@@ -14,11 +14,17 @@
         <!--create: creates the schema, destroying previous data.-->
         <!--create-drop: drop the schema when the SessionFactory is closed explicitly, typically when the application is stopped.-->
 
-        <mapping resource="ru/storage/models/Car.hbm.xml"/>
-        <mapping resource="ru/storage/models/CarBody.hbm.xml"/>
-        <mapping resource="ru/storage/models/Transmission.hbm.xml"/>
-        <mapping resource="ru/storage/models/Engine.hbm.xml"/>
-        <mapping resource="ru/storage/models/Wheel.hbm.xml"/>
+        <!--<mapping resource="ru/storage/models/Car.hbm.xml"/>-->
+        <!--<mapping resource="ru/storage/models/CarBody.hbm.xml"/>-->
+        <!--<mapping resource="ru/storage/models/Transmission.hbm.xml"/>-->
+        <!--<mapping resource="ru/storage/models/Engine.hbm.xml"/>-->
+        <!--<mapping resource="ru/storage/models/Wheel.hbm.xml"/>-->
+
+        <mapping class="ru.storage.models.Engine"/>
+        <mapping class="ru.storage.models.Transmission"/>
+        <mapping class="ru.storage.models.CarBody"/>
+        <mapping class="ru.storage.models.Wheel"/>
+        <mapping class="ru.storage.models.Car"/>
 
     </session-factory>
 </hibernate-configuration>

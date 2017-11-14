@@ -30,13 +30,20 @@ public class CarTest {
         Session session =SESSION_FACTORY.openSession();
         session.beginTransaction();
 
-        CarBody body = new CarBody("body 1");
-        Engine engine = new Engine("engine 1");
-        Transmission transmission = new Transmission("transmission 1");
-        Wheel wheel1 = new Wheel("wheel 1");
-        Wheel wheel2 = new Wheel("wheel 2");
-        Wheel wheel3 = new Wheel("wheel 3");
-        Wheel wheel4 = new Wheel("wheel 4");
+        CarBody body = new CarBody();
+        body.setName("body 1");
+        Engine engine = new Engine();
+        engine.setName("engine 1");
+        Transmission transmission = new Transmission();
+        transmission.setName("transmission 1");
+        Wheel wheel1 = new Wheel();
+        wheel1.setName("wheel 1");
+        Wheel wheel2 = new Wheel();
+        wheel2.setName("wheel 2");
+        Wheel wheel3 = new Wheel();
+        wheel3.setName("wheel 3");
+        Wheel wheel4 = new Wheel();
+        wheel4.setName("wheel 4");
 
         session.save(body);
         session.save(engine);
