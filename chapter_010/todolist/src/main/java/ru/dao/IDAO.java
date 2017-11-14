@@ -1,37 +1,35 @@
 package ru.dao;
 
-import ru.models.Item;
-
 import java.util.List;
 
 /**
  * Created by nikolay on 08/11/17.
  */
-public interface IDAO {
+public interface IDAO<T> {
     /**
      * Get all items.
      * @return - list of items.
      */
-    List<Item> getAll();
+    List<T> getAll();
     /**
      * Get active items.
      * @return - list of items.
      */
-    List<Item> getActive();
+    List<T> getActive();
     /**
      * Get item by id.
      * @param id - id.
      * @return - item.
      */
-    Item getById(int id);
+    T getById(int id);
     /**
      * add item.
      * @param item - item.
      */
-    void add(Item item);
+    void add(T item);
     /**
      * update item.
      * @param item - item.
      */
-    void update(Item item);
+    void update(T item);
 }

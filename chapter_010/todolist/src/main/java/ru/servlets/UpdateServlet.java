@@ -1,6 +1,6 @@
 package ru.servlets;
 
-import ru.dao.DAOImpl;
+import ru.dao.ItemDAOImpl;
 import ru.dao.IDAO;
 import ru.models.Item;
 
@@ -16,7 +16,7 @@ import java.io.IOException;
 public class UpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        IDAO dao = new DAOImpl();
+        IDAO<Item> dao = new ItemDAOImpl();
         Item m = dao.getById(Integer.valueOf(req.getParameter("id")));
         m.setDone((m.getDone() ? false : true));
         dao.update(m);

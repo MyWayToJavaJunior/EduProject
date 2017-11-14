@@ -27,6 +27,10 @@
         <url-pattern>/add</url-pattern>
     </servlet-mapping>
 
+    <listener>
+        <listener-class>ru.listener.AppContextListener</listener-class>
+    </listener>
+
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
