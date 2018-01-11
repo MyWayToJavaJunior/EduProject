@@ -2,7 +2,7 @@ package ru.eventcounter;
 
 import java.sql.Timestamp;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -13,8 +13,9 @@ public class Counter implements ICounter {
     private static final long HOUR_IN_MILLIS = 60 * 60 * 1000;
     private static final long DAY_IN_MILLIS = 60 * 60 * 24 * 1000;
 
-    private Map<Integer, EventWrapper> map = new ConcurrentHashMap<>();
-    private AtomicInteger counter = new AtomicInteger(0);
+    private Map<Integer, EventWrapper> map = new ConcurrentSkipListMap<>();
+
+    private AtomicInteger counter = new AtomicInteger(Integer.MAX_VALUE);
 
     private class EventWrapper {
         private String event;
@@ -28,7 +29,7 @@ public class Counter implements ICounter {
 
     @Override
     public void addEvent(String event) {
-        map.put(counter.incrementAndGet(),
+        map.put(counter.decrementAndGet(),
                 new EventWrapper(event, new Timestamp(System.currentTimeMillis())));
     }
 
@@ -47,7 +48,14 @@ public class Counter implements ICounter {
     }
 
     private long calculate(long interval) {
-        return map.entrySet().stream().filter(x -> x.getValue().timestamp
-                .after(new Timestamp(System.currentTimeMillis() - interval))).count();
+        int count = 0;
+        for(Map.Entry<Integer, EventWrapper> entry : map.entrySet()) {
+            if (entry.getValue().timestamp.after(new Timestamp(System.currentTimeMillis() - interval))) {
+                count++;
+            } else {
+                break;
+            }
+        }
+        return count;
     }
 }
